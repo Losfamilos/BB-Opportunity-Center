@@ -13,12 +13,11 @@
         .bg-bb-teal { background-color: #00d7b9; }
         .filter-btn.active { background-color: #1a1a1a; color: white; border-color: #1a1a1a; }
         .opportunity-row.hidden { display: none; }
-        /* Animation til AI Ticker */
         @keyframes scroll {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-        .ticker-move { display: inline-block; animation: scroll 25s linear infinite; }
+        .ticker-move { display: inline-block; animation: scroll 30s linear infinite; }
     </style>
 </head>
 <body class="text-slate-900 antialiased">
@@ -35,7 +34,7 @@
                 <h1 class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Strategy <span class="text-black">& Change</span></h1>
             </div>
             <div class="flex items-center space-x-6 text-[11px] font-bold uppercase tracking-widest">
-                <span class="text-gray-400">User: J. Astrupgaard (Director)</span>
+                <span class="text-gray-400 font-medium">User: J. Astrupgaard</span>
                 <div class="h-2 w-2 rounded-full bg-bb-teal animate-pulse"></div>
             </div>
         </div>
@@ -44,7 +43,7 @@
     <div class="bg-slate-900 py-2 overflow-hidden border-b border-bb-teal">
         <div class="whitespace-nowrap">
             <div class="ticker-move text-[#00d7b9] text-[10px] font-mono font-bold uppercase tracking-[0.2em]">
-                +++ SCANNING CVR DATA... NEW TECH STARTUP FUNDING DETECTED IN AARHUS +++ EU DIRECTIVE 2026/04 COMPLIANCE DEADLINE APPROACHING +++ ECB INTEREST RATE FORECAST: -25BPS +++ M&A VOLUME UP 12% IN SCANDINAVIAN RETAIL SECTOR +++
+                +++ SCANNING CVR DATA... NEW TECH STARTUP FUNDING DETECTED IN AARHUS +++ EU DIRECTIVE 2026/04 COMPLIANCE DEADLINE APPROACHING +++ ECB INTEREST RATE FORECAST: -25BPS +++ M&A VOLUME UP 12% IN SCANDINAVIAN RETAIL SECTOR +++ RESTRUCTURING OPPORTUNITY DETECTED IN RETAIL CHAIN X +++
             </div>
         </div>
     </div>
@@ -54,19 +53,19 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total Pipeline Value</p>
-                <p class="text-3xl font-bold">14.2M <span class="text-sm font-normal text-gray-400">DKK</span></p>
+                <p class="text-3xl font-bold">21.8M <span class="text-sm font-normal text-gray-400">DKK</span></p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
                 <p class="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-1">Critical Priority</p>
-                <p class="text-3xl font-bold">3 <span class="text-xs text-gray-400 font-normal">Action Required Now</span></p>
+                <p class="text-3xl font-bold">4 <span class="text-xs text-gray-400 font-normal">Immediate Action Required</span></p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-amber-400">
                 <p class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-1">Medium (Nurture)</p>
-                <p class="text-3xl font-bold">5 <span class="text-xs text-gray-400 font-normal">Partner Review Pending</span></p>
+                <p class="text-3xl font-bold">7 <span class="text-xs text-gray-400 font-normal">Partner Review Needed</span></p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-bb-teal">
                 <p class="text-[10px] font-bold text-bb-teal uppercase tracking-widest mb-1">New Triggers</p>
-                <p class="text-3xl font-bold">4 <span class="text-xs text-gray-400 font-normal">Identified Today</span></p>
+                <p class="text-3xl font-bold">6 <span class="text-xs text-gray-400 font-normal">Identified Last 24h</span></p>
             </div>
         </div>
 
@@ -77,6 +76,8 @@
                 <button onclick="filterSelection('m-a')" class="filter-btn px-6 py-2 rounded-lg text-xs font-bold uppercase transition-all">M&A</button>
                 <button onclick="filterSelection('real-estate')" class="filter-btn px-6 py-2 rounded-lg text-xs font-bold uppercase transition-all">Real Estate</button>
                 <button onclick="filterSelection('esg')" class="filter-btn px-6 py-2 rounded-lg text-xs font-bold uppercase transition-all">ESG</button>
+                <button onclick="filterSelection('tax')" class="filter-btn px-6 py-2 rounded-lg text-xs font-bold uppercase transition-all">Tax</button>
+                <button onclick="filterSelection('restructure')" class="filter-btn px-6 py-2 rounded-lg text-xs font-bold uppercase transition-all">Restructuring</button>
             </div>
         </div>
 
@@ -104,7 +105,7 @@
                         <td class="px-8 py-10">
                             <div class="p-5 bg-bb-teal/5 border-l-2 border-bb-teal rounded-r-lg">
                                 <p class="text-xs font-bold text-bb-teal uppercase mb-2">Strategy Hook</p>
-                                <p class="text-sm text-slate-700 leading-relaxed italic">"Potentiale for exit-optimering. Partner pitch: Fokusér på minoritetsbeskyttelse og ejeraftaler før Series B."</p>
+                                <p class="text-sm text-slate-700 leading-relaxed italic">"Potentiale for exit-optimering. Fokus på minoritetsbeskyttelse og ejeraftaler før Series B."</p>
                             </div>
                         </td>
                         <td class="px-8 py-10 text-right">
@@ -113,10 +114,31 @@
                         </td>
                     </tr>
 
+                    <tr class="opportunity-row restructure hover:bg-slate-50/50 transition-all">
+                        <td class="px-8 py-10">
+                            <span class="block font-bold text-base mb-1">Retail Chain (Fashion)</span>
+                            <span class="text-[9px] bg-red-100 text-red-700 px-2 py-1 rounded font-bold uppercase tracking-widest border border-red-200">Critical Priority</span>
+                        </td>
+                        <td class="px-8 py-10 w-1/4">
+                            <p class="text-sm font-semibold text-slate-800 mb-1">Tre negative årsregnskaber i træk for mellemstor detailkæde.</p>
+                            <span class="text-[11px] text-gray-400 italic font-medium tracking-wide">Regnskabsscanner / Risk Alert</span>
+                        </td>
+                        <td class="px-8 py-10">
+                            <div class="p-5 bg-red-50 border-l-2 border-red-500 rounded-r-lg">
+                                <p class="text-xs font-bold text-red-500 uppercase mb-2">Strategy Hook</p>
+                                <p class="text-sm text-slate-700 leading-relaxed italic">"Proaktiv rekonstruktion. Mulighed for Chapter 11-inspireret reorganisering og kreditoraftaler før insolvens."</p>
+                            </div>
+                        </td>
+                        <td class="px-8 py-10 text-right">
+                            <button onclick="copyText('p4')" class="bg-black text-white text-[10px] font-bold py-3 px-6 rounded-lg hover:bg-slate-800 hover:-translate-y-0.5 transition-all uppercase tracking-widest">Execute Pitch</button>
+                            <div id="p4" class="hidden">Vi ser på tværs af markedet en tendens til tidlig reorganisering for at sikre overlevelse. Skal vi gennemgå jeres handlemuligheder?</div>
+                        </td>
+                    </tr>
+
                     <tr class="opportunity-row esg hover:bg-slate-50/50 transition-all">
                         <td class="px-8 py-10">
-                            <span class="block font-bold text-base mb-1">C25 Global</span>
-                            <span class="text-[9px] bg-bb-teal text-white px-2 py-1 rounded font-bold uppercase tracking-widest">New Opportunity</span>
+                            <span class="block font-bold text-base mb-1">C25 Global Logistics</span>
+                            <span class="text-[9px] bg-bb-teal text-white px-2 py-1 rounded font-bold uppercase tracking-widest">New Trigger</span>
                         </td>
                         <td class="px-8 py-10 w-1/4">
                             <p class="text-sm font-semibold text-slate-800 mb-1">Nyt EU CSRD-direktiv vedtaget.</p>
@@ -134,19 +156,40 @@
                         </td>
                     </tr>
 
-                    <tr class="opportunity-row real-estate hover:bg-slate-50/50 transition-all">
+                    <tr class="opportunity-row tax hover:bg-slate-50/50 transition-all">
                         <td class="px-8 py-10">
-                            <span class="block font-bold text-base mb-1">Institutional Funds</span>
+                            <span class="block font-bold text-base mb-1">Family Office</span>
                             <span class="text-[9px] bg-amber-100 text-amber-700 px-2 py-1 rounded font-bold uppercase tracking-widest border border-amber-200">Medium Priority</span>
                         </td>
                         <td class="px-8 py-10 w-1/4">
-                            <p class="text-sm font-semibold text-slate-800 mb-1">ECB Rentefald på 0.5% annonceret.</p>
-                            <span class="text-[11px] text-gray-400 italic font-medium tracking-wide">Financial Times / Interest Feed</span>
+                            <p class="text-sm font-semibold text-slate-800 mb-1">Nye regler for generationsskiftebeskatning under behandling.</p>
+                            <span class="text-[11px] text-gray-400 italic font-medium tracking-wide">Skatteministeriet / Policy Alert</span>
                         </td>
                         <td class="px-8 py-10">
                             <div class="p-5 bg-amber-50 border-l-2 border-amber-400 rounded-r-lg">
                                 <p class="text-xs font-bold text-amber-500 uppercase mb-2">Strategy Hook</p>
-                                <p class="text-sm text-slate-700 leading-relaxed italic">"Genforhandling af finansieringsaftaler. Kontakt top-10 porteføljer for optimering af gearing."</p>
+                                <p class="text-sm text-slate-700 leading-relaxed italic">"Rettidig formuestrukturering. Beskyt familiearven mod kommende skattechok."</p>
+                            </div>
+                        </td>
+                        <td class="px-8 py-10 text-right">
+                            <button onclick="copyText('p5')" class="bg-black text-white text-[10px] font-bold py-3 px-6 rounded-lg hover:bg-slate-800 hover:-translate-y-0.5 transition-all uppercase tracking-widest">Execute Pitch</button>
+                            <div id="p5" class="hidden">Har I overvejet de skattemæssige konsekvenser af det nye lovforslag for jeres kommende generationsskifte?</div>
+                        </td>
+                    </tr>
+
+                    <tr class="opportunity-row real-estate hover:bg-slate-50/50 transition-all">
+                        <td class="px-8 py-10">
+                            <span class="block font-bold text-base mb-1">Pension Fund</span>
+                            <span class="text-[9px] bg-amber-100 text-amber-700 px-2 py-1 rounded font-bold uppercase tracking-widest border border-amber-200">Medium Priority</span>
+                        </td>
+                        <td class="px-8 py-10 w-1/4">
+                            <p class="text-sm font-semibold text-slate-800 mb-1">ECB Rentefald på 0.5% annonceret.</p>
+                            <span class="text-[11px] text-gray-400 italic font-medium tracking-wide">Financial Times / News Alert</span>
+                        </td>
+                        <td class="px-8 py-10">
+                            <div class="p-5 bg-amber-50 border-l-2 border-amber-400 rounded-r-lg">
+                                <p class="text-xs font-bold text-amber-500 uppercase mb-2">Strategy Hook</p>
+                                <p class="text-sm text-slate-700 leading-relaxed italic">"Genforhandling af finansiering. Kontakt top-10 porteføljer for optimering af gearing før markedet reagerer."</p>
                             </div>
                         </td>
                         <td class="px-8 py-10 text-right">
