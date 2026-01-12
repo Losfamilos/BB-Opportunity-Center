@@ -3,98 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bech-Bruun | Opportunity Engine v1.2</title>
+    <title>Bech-Bruun | Commercial Opportunity Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; }
-        .bech-bruun-teal { color: #00d7b9; }
-        .bech-bruun-bg-teal { background-color: #00d7b9; }
-        .status-pill { font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; }
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; }
+        .bb-teal { color: #00d7b9; }
+        .bg-bb-teal { background-color: #00d7b9; }
+        .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05); }
         .filter-btn.active { background-color: #1a1a1a; color: white; border-color: #1a1a1a; }
         tr.hidden { display: none; }
     </style>
 </head>
-<body class="text-gray-900 antialiased">
+<body class="text-slate-900 antialiased">
 
-    <header class="border-b border-gray-100 bg-white sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="flex items-center space-x-8">
-                <img src="https://www.bechbruun.com/assets/images/logo.svg" alt="Bech-Bruun" class="h-8">
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-8 py-6 flex justify-between items-center">
+            <div class="flex items-center space-x-10">
+                <img src="https://www.bechbruun.com/assets/images/logo.svg" alt="Bech-Bruun" class="h-7">
                 <div class="h-6 w-px bg-gray-200"></div>
-                <h1 class="text-lg font-light tracking-tight text-gray-500">Strategy <span class="font-bold text-black">& Change</span></h1>
+                <nav class="flex space-x-6 text-[13px] font-medium tracking-wide text-gray-500 uppercase">
+                    <span class="text-black border-b-2 border-bb-teal pb-7 mt-7">Opportunity Engine</span>
+                    <span class="hover:text-black cursor-pointer pb-7 mt-7 transition">Portfolio Analysis</span>
+                </nav>
             </div>
-            <div class="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase">
-                Commercial Excellence Engine v1.2
+            <div class="flex items-center space-x-4">
+                <span class="text-[10px] font-bold text-gray-400 tracking-[0.2em] uppercase">Executive Dashboard v1.3</span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-16">
-        <div class="mb-12">
-            <h2 class="text-5xl font-bold tracking-tighter mb-6">Opportunity Dashboard</h2>
-            <p class="text-xl text-gray-400 max-w-3xl leading-relaxed font-light">
-                Strategisk eksekvering gennem automatiserede markeds-triggers. Vi gør det komplekse operationelt for partnerkredsen.
-            </p>
+    <main class="max-w-[1400px] mx-auto px-8 py-12">
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-xl border border-gray-100 card-shadow">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Opportunities</p>
+                <p class="text-3xl font-bold">12</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-l-4 border-red-500 card-shadow">
+                <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-1 font-semibold">Critical (High Value)</p>
+                <p class="text-3xl font-bold">3</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-l-4 border-amber-400 card-shadow">
+                <p class="text-xs font-bold text-amber-500 uppercase tracking-widest mb-1">Medium (Nurture)</p>
+                <p class="text-3xl font-bold">5</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border-l-4 border-green-400 card-shadow">
+                <p class="text-xs font-bold text-green-500 uppercase tracking-widest mb-1">Low (Monitoring)</p>
+                <p class="text-3xl font-bold">4</p>
+            </div>
         </div>
 
-        <div class="flex flex-wrap gap-2 mb-10" id="filter-container">
-            <button onclick="filterSelection('all')" class="filter-btn active px-6 py-2 border border-gray-200 rounded-full text-sm font-medium transition-all">Alle Indsatser</button>
-            <button onclick="filterSelection('m-a')" class="filter-btn px-6 py-2 border border-gray-200 rounded-full text-sm font-medium transition-all">M&A</button>
-            <button onclick="filterSelection('real-estate')" class="filter-btn px-6 py-2 border border-gray-200 rounded-full text-sm font-medium transition-all">Real Estate</button>
-            <button onclick="filterSelection('esg')" class="filter-btn px-6 py-2 border border-gray-200 rounded-full text-sm font-medium transition-all">ESG & Compliance</button>
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight mb-4">Market Triggers</h2>
+                <div class="flex gap-2" id="filter-container">
+                    <button onclick="filterSelection('all')" class="filter-btn active px-5 py-2 border border-gray-200 rounded-lg text-sm font-medium transition-all">All</button>
+                    <button onclick="filterSelection('m-a')" class="filter-btn px-5 py-2 border border-gray-200 rounded-lg text-sm font-medium transition-all">M&A</button>
+                    <button onclick="filterSelection('real-estate')" class="filter-btn px-5 py-2 border border-gray-200 rounded-lg text-sm font-medium transition-all">Real Estate</button>
+                    <button onclick="filterSelection('tax')" class="filter-btn px-5 py-2 border border-gray-200 rounded-lg text-sm font-medium transition-all">Tax</button>
+                    <button onclick="filterSelection('esg')" class="filter-btn px-5 py-2 border border-gray-200 rounded-lg text-sm font-medium transition-all">ESG</button>
+                </div>
+            </div>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-separate border-spacing-y-4">
+        <div class="bg-white rounded-2xl border border-gray-100 card-shadow overflow-hidden">
+            <table class="w-full text-left">
                 <thead>
-                    <tr class="text-[11px] font-bold uppercase tracking-widest text-gray-400 px-6">
-                        <th class="px-8 py-2">Klient Segment</th>
-                        <th class="px-8 py-2">Commercial Trigger</th>
-                        <th class="px-8 py-2">Recommended Action & Pitch Idea</th>
-                        <th class="px-8 py-2 text-right">Operationel Eksekvering</th>
+                    <tr class="bg-gray-50/50 border-b border-gray-100">
+                        <th class="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Client Segment</th>
+                        <th class="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Commercial Trigger</th>
+                        <th class="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Recommended Action</th>
+                        <th class="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap text-right">Outreach</th>
                     </tr>
                 </thead>
-                <tbody id="opportunity-table">
-                    <tr class="opportunity-row m-a bg-gray-50/50 hover:bg-white hover:shadow-xl hover:shadow-gray-100 transition-all duration-300 rounded-xl">
-                        <td class="px-8 py-10 rounded-l-xl border-y border-l border-transparent">
-                            <span class="block font-bold text-lg mb-1">Tech & Robotics</span>
-                            <span class="status-pill text-bech-bruun-teal border border-[#00d7b9]/30 px-2 py-0.5 rounded">High Growth Opportunity</span>
+                <tbody class="divide-y divide-gray-50">
+                    <tr class="opportunity-row m-a hover:bg-slate-50/50 transition-all">
+                        <td class="px-8 py-8">
+                            <span class="block font-bold text-base">Tech Scale-ups</span>
+                            <span class="text-[10px] bg-red-50 text-red-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider border border-red-100">Critical</span>
                         </td>
-                        <td class="px-8 py-10 border-y border-transparent">
-                            <p class="font-semibold text-gray-800 leading-snug">Udenlandsk investor køber 20% af dansk robot-startup.</p>
-                            <span class="text-gray-400 text-xs mt-2 block italic">Kilde: CVR-Data / Børsen</span>
+                        <td class="px-8 py-8">
+                            <p class="text-sm font-semibold text-slate-800">Udenlandsk investor køber 20% af dansk robot-startup.</p>
+                            <span class="text-[11px] text-gray-400 mt-1 block">Source: CVR Monitor</span>
                         </td>
-                        <td class="px-8 py-10 border-y border-transparent">
-                            <div class="text-sm text-gray-600 space-y-3">
-                                <p><strong>Action:</strong> Proaktiv rådgivning om minoritetsbeskyttelse og vedtægtsændringer.</p>
-                                <p class="bg-white p-3 border-l-2 border-bech-bruun-teal italic">"Pitch: Fokusér på 'Future Exit Readiness' – hvordan sikrer vi, at dette setup maksimerer værdien ved et 100% salg om 24 måneder?"</p>
+                        <td class="px-8 py-8">
+                            <div class="text-sm text-slate-600 leading-relaxed">
+                                <p class="mb-2"><strong>Strategic Action:</strong> Gennemgang af ejeraftaler og minoritetsbeskyttelse.</p>
+                                <p class="text-xs text-bb-teal font-medium">Pitch Idea: "Sikr jeres exit-værdi før næste investeringsrunde."</p>
                             </div>
                         </td>
-                        <td class="px-8 py-10 text-right rounded-r-xl border-y border-r border-transparent">
-                            <button onclick="copyText('pitch1')" class="bg-black text-white text-xs font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition">KOPIÉR PITCH</button>
-                            <span id="pitch1" class="hidden">Kære [Navn], jeg bed mærke i jeres nye kapitaltilførsel. Det rejser ofte nogle spændende spørgsmål omkring minoritetsbeskyttelse og jeres langsigtede exit-strategi. Skal vi tage en kort sparring om, hvordan vi sikrer jeres position i det nye setup?</span>
+                        <td class="px-8 py-8 text-right">
+                            <button onclick="copyText('p1')" class="text-[11px] font-bold bg-black text-white px-5 py-2.5 rounded-md hover:bg-slate-800 transition uppercase tracking-wider">Copy Pitch</button>
+                            <span id="p1" class="hidden">Kære [Navn], jeres seneste kapitaludvidelse rejser spændende muligheder. Skal vi sikre jeres position i det nye setup?</span>
                         </td>
                     </tr>
 
-                    <tr class="opportunity-row esg bg-gray-50/50 hover:bg-white hover:shadow-xl hover:shadow-gray-100 transition-all duration-300 rounded-xl">
-                        <td class="px-8 py-10 rounded-l-xl border-y border-l border-transparent">
-                            <span class="block font-bold text-lg mb-1">C25 Manufacturing</span>
-                            <span class="status-pill text-purple-600 border border-purple-200 px-2 py-0.5 rounded">Compliance Trigger</span>
+                    <tr class="opportunity-row real-estate hover:bg-slate-50/50 transition-all">
+                        <td class="px-8 py-8">
+                            <span class="block font-bold text-base">Pension Funds</span>
+                            <span class="text-[10px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider border border-amber-100">Medium</span>
                         </td>
-                        <td class="px-8 py-10 border-y border-transparent">
-                            <p class="font-semibold text-gray-800 leading-snug">Nyt EU-direktiv (CSDDD) vedtaget i EU-Parlamentet.</p>
-                            <span class="text-gray-400 text-xs mt-2 block italic">Kilde: EU Monitor</span>
+                        <td class="px-8 py-8">
+                            <p class="text-sm font-semibold text-slate-800">Forventet rentefald på 0.25% fra ECB i næste måned.</p>
+                            <span class="text-[11px] text-gray-400 mt-1 block">Source: Bloomberg Finance</span>
                         </td>
-                        <td class="px-8 py-10 border-y border-transparent">
-                            <div class="text-sm text-gray-600 space-y-3">
-                                <p><strong>Action:</strong> Gennemgang af leverandørkontrakter (Due Diligence).</p>
-                                <p class="bg-white p-3 border-l-2 border-purple-600 italic">"Pitch: Skift narrativet fra 'compliance-byrde' til 'competitive advantage' i udbudsprocesser."</p>
+                        <td class="px-8 py-8">
+                            <div class="text-sm text-slate-600 leading-relaxed">
+                                <p class="mb-2"><strong>Strategic Action:</strong> Refinansiering af ejendomsporteføljer og genforhandling.</p>
+                                <p class="text-xs text-bb-teal font-medium">Pitch Idea: "Optimer jeres finansielle gearing før markedet reagerer."</p>
                             </div>
                         </td>
-                        <td class="px-8 py-10 text-right rounded-r-xl border-y border-r border-transparent">
-                            <button onclick="copyText('pitch2')" class="bg-black text-white text-xs font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition">KOPIÉR PITCH</button>
-                            <span id="pitch2" class="hidden">Hej [Navn], med det nye CSDDD-direktiv ser vi en stor mulighed for at styrke jeres markedsposition ved at optimere jeres supply chain compliance nu. Jeg har et par tanker om, hvordan vi gør det til en konkurrencefordel frem for blot en administrativ øvelse.</span>
+                        <td class="px-8 py-8 text-right">
+                            <button onclick="copyText('p2')" class="text-[11px] font-bold bg-black text-white px-5 py-2.5 rounded-md hover:bg-slate-800 transition uppercase tracking-wider">Copy Pitch</button>
+                            <span id="p2" class="hidden">Med de kommende rentesignaler ser vi en åbning for at optimere finansieringen af jeres portefølje...</span>
+                        </td>
+                    </tr>
+
+                    <tr class="opportunity-row tax hover:bg-slate-50/50 transition-all">
+                        <td class="px-8 py-8">
+                            <span class="block font-bold text-base">Family Offices</span>
+                            <span class="text-[10px] bg-green-50 text-green-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider border border-green-100">Low</span>
+                        </td>
+                        <td class="px-8 py-8">
+                            <p class="text-sm font-semibold text-slate-800">Nye regler for generationsskiftebeskatning under behandling.</p>
+                            <span class="text-[11px] text-gray-400 mt-1 block">Source: Skatteministeriet</span>
+                        </td>
+                        <td class="px-8 py-8">
+                            <div class="text-sm text-slate-600 leading-relaxed">
+                                <p class="mb-2"><strong>Strategic Action:</strong> Formuestrukturering og rettidig generationsskifte.</p>
+                                <p class="text-xs text-bb-teal font-medium">Pitch Idea: "Fremtidssikr familiearven under de nye skatteregler."</p>
+                            </div>
+                        </td>
+                        <td class="px-8 py-8 text-right">
+                            <button onclick="copyText('p3')" class="text-[11px] font-bold bg-black text-white px-5 py-2.5 rounded-md hover:bg-slate-800 transition uppercase tracking-wider">Copy Pitch</button>
+                            <span id="p3" class="hidden">Har I overvejet konsekvenserne af de nye skatteregler for jeres kommende generationsskifte?</span>
                         </td>
                     </tr>
                 </tbody>
@@ -111,8 +154,6 @@
                 x[i].classList.add("hidden");
                 if (x[i].className.indexOf(c) > -1) x[i].classList.remove("hidden");
             }
-            
-            // Opdater knap-styling
             var btns = document.getElementsByClassName("filter-btn");
             for (var i = 0; i < btns.length; i++) {
                 btns[i].classList.remove("active");
@@ -123,7 +164,7 @@
         function copyText(id) {
             const text = document.getElementById(id).innerText;
             navigator.clipboard.writeText(text);
-            alert("Strategisk pitch kopieret til din udklipsholder!");
+            alert("Strategisk pitch kopieret!");
         }
     </script>
 </body>
