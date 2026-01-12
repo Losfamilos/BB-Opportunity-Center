@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bech-Bruun | Opportunity Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; }
+        h1 { font-family: 'Playfair Display', serif; }
+        .bech-bruun-black { background-color: #1a1a1a; }
+        .status-pill { font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    </style>
+</head>
+<body class="text-gray-900 antialiased">
+
+    <header class="border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="h-8 w-1 bech-bruun-black"></div>
+                <h1 class="text-2xl tracking-tight">Strategy <span class="text-gray-400">&</span> Change</h1>
+            </div>
+            <div class="text-xs font-semibold tracking-widest text-gray-500 uppercase">
+                Commercial Excellence Engine v1.0
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="mb-12">
+            <h2 class="text-4xl font-bold mb-4">Opportunity Dashboard</h2>
+            <p class="text-gray-500 max-w-2xl mb-8 italic">Automatiserede kommercielle triggers og AI-genererede outreach-hooks til partnerkredsen.</p>
+            
+            <div class="flex flex-wrap gap-3">
+                <button class="px-5 py-2 bech-bruun-black text-white text-sm font-medium hover:opacity-90 transition">Alle Indsatser</button>
+                <button class="px-5 py-2 border border-gray-200 bg-white text-sm font-medium hover:bg-gray-50 transition">M&A</button>
+                <button class="px-5 py-2 border border-gray-200 bg-white text-sm font-medium hover:bg-gray-50 transition">Real Estate</button>
+                <button class="px-5 py-2 border border-gray-200 bg-white text-sm font-medium hover:bg-gray-50 transition">ESG & Compliance</button>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 border-b border-gray-200">
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-600">Klient Segment</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-600">Commercial Trigger</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-600">Strategic Action</th>
+                        <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-600">Outreach Draft</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr class="hover:bg-gray-50/50 transition">
+                        <td class="px-6 py-8 align-top">
+                            <span class="block font-semibold">Tech Scale-ups</span>
+                            <span class="status-pill bg-blue-50 text-blue-700 px-2 py-1 rounded">High Growth</span>
+                        </td>
+                        <td class="px-6 py-8 align-top text-sm">
+                            <p class="font-medium text-gray-900">Udenlandsk investor køber 20% af dansk robot-startup.</p>
+                            <span class="text-gray-400 text-xs italic">Kilde: CVR-Data / Børsen</span>
+                        </td>
+                        <td class="px-6 py-8 align-top text-sm">
+                            <p class="text-gray-700">Potentiale for fuld exit-rådgivning og optimering af ejeraftale før næste Series B runde.</p>
+                        </td>
+                        <td class="px-6 py-8 align-top">
+                            <button onclick="copyText('copy1')" class="text-xs border border-gray-300 px-3 py-2 rounded mb-2 hover:bg-gray-100 block w-full text-left">
+                                <span id="copy1">"Hej [Navn], jeg bed mærke i jeres nye kapitaltilførsel. Det rejser ofte nogle spændende spørgsmål omkring..."</span>
+                            </button>
+                            <span class="text-[10px] text-gray-400">Klik for at kopiere draft</span>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-50/50 transition">
+                        <td class="px-6 py-8 align-top">
+                            <span class="block font-semibold">Asset Management</span>
+                            <span class="status-pill bg-green-50 text-green-700 px-2 py-1 rounded">Institutional</span>
+                        </td>
+                        <td class="px-6 py-8 align-top text-sm">
+                            <p class="font-medium text-gray-900">Rentefald på 0.5% annonceret af ECB.</p>
+                            <span class="text-gray-400 text-xs italic">Kilde: Finans.dk</span>
+                        </td>
+                        <td class="px-6 py-8 align-top text-sm">
+                            <p class="text-gray-700">Kontakt top-10 ejendomsporteføljer for genforhandling af finansieringsaftaler og refinansiering.</p>
+                        </td>
+                        <td class="px-6 py-8 align-top">
+                            <button onclick="copyText('copy2')" class="text-xs border border-gray-300 px-3 py-2 rounded mb-2 hover:bg-gray-100 block w-full text-left">
+                                <span id="copy2">"Givet de nye signaler fra ECB, ser vi en åbning for at optimere jeres porteføljestruktur..."</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            alert("Draft kopieret til udklipsholder!");
+        }
+    </script>
+</body>
+</html>
