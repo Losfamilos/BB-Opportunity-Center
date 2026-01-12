@@ -5,151 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bech-Bruun | Opportunity OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; }
         .bb-teal { color: #00d7b9; }
         .bg-bb-teal { background-color: #00d7b9; }
-        .border-bb-teal { border-color: #00d7b9; }
-        .nav-link.active { color: black; border-bottom: 2px solid #00d7b9; }
+        .nav-link.active { color: #00d7b9; border-bottom: 2px solid #00d7b9; }
         .hidden-page { display: none; }
         .filter-btn.active { background-color: #1a1a1a; color: white; border-color: #1a1a1a; }
         .opportunity-row.hidden { display: none; }
         @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .ticker-move { display: inline-block; animation: scroll 30s linear infinite; }
+        .ticker-move { display: inline-block; animation: scroll 35s linear infinite; }
+        .card-shadow { box-shadow: 0 10px 30px -10px rgba(0,0,0,0.04); }
     </style>
 </head>
 <body class="text-slate-900 antialiased">
 
-    <header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-[1600px] mx-auto px-10 py-5 flex justify-between items-center">
-            <div class="flex items-center space-x-10">
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-[1600px] mx-auto px-12 py-7 flex justify-between items-center">
+            <div class="flex items-center space-x-12">
                 <div class="flex items-center uppercase tracking-tighter cursor-pointer" onclick="showPage(1)">
-                    <span class="text-xl font-bold">Bech</span><span class="text-xl font-light">Bruun</span>
-                    <div class="h-5 w-[3px] bg-bb-teal ml-4"></div>
+                    <span class="text-2xl font-bold italic">Bech</span><span class="text-2xl font-light italic">Bruun</span>
+                    <div class="h-6 w-[3px] bg-bb-teal ml-5"></div>
                 </div>
-                <nav class="flex space-x-8 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                    <button id="nav1" onclick="showPage(1)" class="nav-link active pb-1 transition">Market Triggers</button>
-                    <button id="nav2" onclick="showPage(2)" class="nav-link pb-1 transition">Portfolio Analysis</button>
+                <nav class="flex space-x-10 text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400">
+                    <button id="nav1" onclick="showPage(1)" class="nav-link active pb-2 transition-all hover:text-black">Market Triggers</button>
+                    <button id="nav2" onclick="showPage(2)" class="nav-link pb-2 transition-all hover:text-black">Partner Portfolio</button>
                 </nav>
             </div>
-            <div class="text-[10px] font-bold text-gray-400 tracking-[0.2em]">USER: J. ASTRUPGAARD</div>
+            <div class="flex items-center space-x-4">
+                <span class="text-[10px] font-bold text-gray-400 tracking-widest uppercase">User: J. Astrupgaard</span>
+                <div class="h-2 w-2 rounded-full bg-bb-teal animate-pulse"></div>
+            </div>
         </div>
     </header>
 
     <div id="page1">
-        <div class="bg-slate-900 py-2 overflow-hidden border-b border-bb-teal text-[#00d7b9]">
-            <div class="ticker-move text-[10px] font-mono font-bold uppercase tracking-[0.2em]">
-                +++ SCANNING CVR DATA... NEW M&A OPPORTUNITY IN RETAIL +++ ECB RATE DROP DETECTED +++ ESG COMPLIANCE ALERT +++ NEW FUNDING IN TECH SECTOR +++ RESTRUCTURING POTENTIAL IN FASHION RETAIL +++
+        <div class="bg-slate-950 py-3 overflow-hidden border-b border-bb-teal">
+            <div class="ticker-move text-[#00d7b9] text-[10px] font-mono font-medium uppercase tracking-[0.3em]">
+                +++ RESTRUCTURING ALERT: RETAIL SECTOR VOLATILITY +++ NEW M&A TRIGGER: TECH STARTUP FUNDING +++ ECB RATE DROP EXPECTED -25BPS +++ ESG COMPLIANCE DEADLINE APPROACHING +++ TAX LEGISLATION UPDATE +++
             </div>
         </div>
 
-        <main class="max-w-[1600px] mx-auto px-10 py-10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Pipeline Value</p>
-                    <p class="text-3xl font-bold italic">28.4M <span class="text-sm font-normal">DKK</span></p>
+        <main class="max-w-[1600px] mx-auto px-12 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-2xl card-shadow border border-gray-50">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Portfolio Value</p>
+                    <p class="text-4xl font-light tracking-tight">32.4M <span class="text-sm text-gray-300 uppercase">DKK</span></p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-500">
-                    <p class="text-[10px] font-bold text-red-500 uppercase mb-1">Critical Priority</p>
-                    <p class="text-3xl font-bold">4</p>
+                <div class="bg-white p-8 rounded-2xl card-shadow border-l-4 border-red-500">
+                    <p class="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-2">Critical Actions</p>
+                    <p class="text-4xl font-light tracking-tight">5</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-bb-teal">
-                    <p class="text-[10px] font-bold text-bb-teal uppercase mb-1">Win Probability (Avg)</p>
-                    <p class="text-3xl font-bold">68%</p>
+                <div class="bg-white p-8 rounded-2xl card-shadow border-l-4 border-bb-teal">
+                    <p class="text-[10px] font-bold text-bb-teal uppercase tracking-widest mb-2">Avg. Win Probability</p>
+                    <p class="text-4xl font-light tracking-tight">72%</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-amber-400">
-                    <p class="text-[10px] font-bold text-amber-500 uppercase mb-1">New Triggers</p>
-                    <p class="text-3xl font-bold">7</p>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold tracking-tight">Opportunity Engine</h2>
-                <div class="flex bg-white p-1 rounded-xl shadow-sm border border-gray-100" id="filter-container">
-                    <button onclick="filterSelection('all')" class="filter-btn active px-5 py-2 rounded-lg text-xs font-bold uppercase transition-all">All</button>
-                    <button onclick="filterSelection('m-a')" class="filter-btn px-5 py-2 rounded-lg text-xs font-bold uppercase transition-all">M&A</button>
-                    <button onclick="filterSelection('esg')" class="filter-btn px-5 py-2 rounded-lg text-xs font-bold uppercase transition-all">ESG</button>
-                    <button onclick="filterSelection('restructure')" class="filter-btn px-5 py-2 rounded-lg text-xs font-bold uppercase transition-all">Restructuring</button>
-                    <button onclick="filterSelection('tax')" class="filter-btn px-5 py-2 rounded-lg text-xs font-bold uppercase transition-all">Tax</button>
+                <div class="bg-white p-8 rounded-2xl card-shadow border-l-4 border-amber-400">
+                    <p class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-2">New Opportunities</p>
+                    <p class="text-4xl font-light tracking-tight">8</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight mb-2 text-slate-800">Opportunity Engine</h2>
+                    <p class="text-gray-400 text-sm italic">Automated market triggers & strategic AI-hooks.</p>
+                </div>
+                <div class="flex bg-white p-1.5 rounded-2xl shadow-sm border border-gray-100" id="filter-container">
+                    <button onclick="filterSelection('all')" class="filter-btn active px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all">All Areas</button>
+                    <button onclick="filterSelection('m-a')" class="filter-btn px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all">M&A</button>
+                    <button onclick="filterSelection('restructure')" class="filter-btn px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all">Restructuring</button>
+                    <button onclick="filterSelection('esg')" class="filter-btn px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all">ESG</button>
+                    <button onclick="filterSelection('tax')" class="filter-btn px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all">Tax</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-[2rem] card-shadow border border-gray-50 overflow-hidden">
                 <table class="w-full text-left">
-                    <thead class="bg-slate-50 border-b border-gray-100">
-                        <tr class="text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                            <th class="px-8 py-5">Segment</th>
-                            <th class="px-8 py-5">Commercial Trigger</th>
-                            <th class="px-8 py-5">Est. Deal Value</th>
-                            <th class="px-8 py-5">Win Prob.</th>
-                            <th class="px-8 py-5 text-right">Operationalize</th>
+                    <thead>
+                        <tr class="bg-slate-50/50 border-b border-gray-100">
+                            <th class="px-10 py-6 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Target Segment</th>
+                            <th class="px-10 py-6 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Commercial Trigger</th>
+                            <th class="px-10 py-6 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Est. Value</th>
+                            <th class="px-10 py-6 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Probability</th>
+                            <th class="px-10 py-6 text-right"></th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
-                        <tr class="opportunity-row m-a hover:bg-slate-50/50 transition-all">
-                            <td class="px-8 py-10">
-                                <span class="font-bold text-lg block">Tech Scale-ups</span>
-                                <span class="text-[9px] bg-red-100 text-red-600 px-2 py-0.5 rounded font-bold uppercase italic">Critical</span>
+                        <tr class="opportunity-row m-a hover:bg-slate-50/50 transition-all group">
+                            <td class="px-10 py-10">
+                                <span class="block font-bold text-lg text-slate-800">Tech & Robotics</span>
+                                <span class="text-[9px] bg-red-50 text-red-600 px-2 py-1 rounded font-bold uppercase tracking-widest border border-red-100">Critical Priority</span>
                             </td>
-                            <td class="px-8 py-10 w-1/4">
-                                <p class="text-sm font-semibold text-slate-800 leading-snug">Udenlandsk investor køber 20% af dansk robot-startup.</p>
-                                <span class="text-[10px] text-gray-400 block mt-1">CVR Monitor / Alpha Intel</span>
+                            <td class="px-10 py-10 w-1/3 text-sm text-slate-600 leading-relaxed italic">
+                                "Udenlandsk investor køber 20% af dansk robot-startup. Potentiale for exit-optimering og ejeraftaler."
                             </td>
-                            <td class="px-8 py-10 font-bold text-slate-800 tracking-tight">1.5M - 2.2M DKK</td>
-                            <td class="px-8 py-10">
-                                <div class="w-32 bg-gray-100 h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-bb-teal h-full" style="width: 75%"></div>
+                            <td class="px-10 py-10 font-medium text-slate-800 italic">2.4M DKK</td>
+                            <td class="px-10 py-10">
+                                <div class="w-24 bg-gray-100 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-bb-teal h-full" style="width: 85%"></div>
                                 </div>
-                                <span class="text-[10px] font-bold mt-1 block">75% (Strong Relation)</span>
+                                <span class="text-[10px] font-bold text-gray-400 mt-2 block tracking-tighter">85% - STRONG</span>
                             </td>
-                            <td class="px-8 py-10 text-right">
-                                <button onclick="copyText('p1')" class="bg-black text-white text-[10px] font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all uppercase tracking-widest">Execute Pitch</button>
-                                <div id="p1" class="hidden">Kære [Navn], jeres seneste kapitaludvidelse rejser spændende muligheder for at optimere jeres ejeraftaler...</div>
+                            <td class="px-10 py-10 text-right">
+                                <button onclick="copyText('p1')" class="bg-black text-white text-[10px] font-bold py-3.5 px-8 rounded-xl hover:bg-slate-800 transition-all uppercase tracking-widest shadow-lg shadow-gray-200 group-hover:-translate-y-1">Execute Pitch</button>
+                                <div id="p1" class="hidden">Kære [Navn], jeres seneste kapitaludvidelse rejser spændende muligheder...</div>
                             </td>
                         </tr>
-
-                        <tr class="opportunity-row restructure hover:bg-slate-50/50 transition-all">
-                            <td class="px-8 py-10">
-                                <span class="font-bold text-lg block">Retail (Fashion)</span>
-                                <span class="text-[9px] bg-red-100 text-red-600 px-2 py-0.5 rounded font-bold uppercase italic text-center">Critical</span>
+                        <tr class="opportunity-row restructure hover:bg-slate-50/50 transition-all group">
+                            <td class="px-10 py-10">
+                                <span class="block font-bold text-lg text-slate-800">Fashion Retail</span>
+                                <span class="text-[9px] bg-red-50 text-red-600 px-2 py-1 rounded font-bold uppercase tracking-widest border border-red-100">Critical Priority</span>
                             </td>
-                            <td class="px-8 py-10 w-1/4">
-                                <p class="text-sm font-semibold text-slate-800 leading-snug">Likviditetsalarm: Store fald i kreditværdighed hos stor kæde.</p>
-                                <span class="text-[10px] text-gray-400 block mt-1">Regnskabs-AI / Finance Scan</span>
+                            <td class="px-10 py-10 w-1/3 text-sm text-slate-600 leading-relaxed italic">
+                                "Tre negative årsregnskaber i træk for mellemstor detailkæde. Mulighed for proaktiv rekonstruktion."
                             </td>
-                            <td class="px-8 py-10 font-bold text-slate-800 tracking-tight">3.0M - 4.5M DKK</td>
-                            <td class="px-8 py-10">
-                                <div class="w-32 bg-gray-100 h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-amber-400 h-full" style="width: 55%"></div>
+                            <td class="px-10 py-10 font-medium text-slate-800 italic">4.2M DKK</td>
+                            <td class="px-10 py-10">
+                                <div class="w-24 bg-gray-100 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-amber-400 h-full" style="width: 45%"></div>
                                 </div>
-                                <span class="text-[10px] font-bold mt-1 block">55% (New Trigger)</span>
+                                <span class="text-[10px] font-bold text-gray-400 mt-2 block tracking-tighter">45% - EMERGING</span>
                             </td>
-                            <td class="px-8 py-10 text-right">
-                                <button onclick="copyText('p2')" class="bg-black text-white text-[10px] font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all uppercase tracking-widest">Execute Pitch</button>
-                                <div id="p2" class="hidden">Vi ser indikationer på markedsuro i jeres sektor. Skal vi tage en fortrolig sparring om rekonstruktion?</div>
+                            <td class="px-10 py-10 text-right">
+                                <button onclick="copyText('p2')" class="bg-black text-white text-[10px] font-bold py-3.5 px-8 rounded-xl hover:bg-slate-800 transition-all uppercase tracking-widest shadow-lg shadow-gray-200 group-hover:-translate-y-1">Execute Pitch</button>
+                                <div id="p2" class="hidden">Vi ser indikationer på markedsuro. Skal vi tage en fortrolig sparring om reorganisering?</div>
                             </td>
                         </tr>
-
-                        <tr class="opportunity-row tax hover:bg-slate-50/50 transition-all">
-                            <td class="px-8 py-10">
-                                <span class="font-bold text-lg block">Family Office</span>
-                                <span class="text-[9px] bg-amber-100 text-amber-600 px-2 py-0.5 rounded font-bold uppercase">Medium</span>
+                        <tr class="opportunity-row tax hover:bg-slate-50/50 transition-all group">
+                            <td class="px-10 py-10">
+                                <span class="block font-bold text-lg text-slate-800">Family Office</span>
+                                <span class="text-[9px] bg-bb-teal/10 text-bb-teal px-2 py-1 rounded font-bold uppercase tracking-widest border border-bb-teal/20">Strategic Entry</span>
                             </td>
-                            <td class="px-8 py-10 w-1/4">
-                                <p class="text-sm font-semibold text-slate-800 leading-snug">Nye skatteregler for generationsskifte under behandling.</p>
-                                <span class="text-[10px] text-gray-400 block mt-1">Policy Alert / Tax Division</span>
+                            <td class="px-10 py-10 w-1/3 text-sm text-slate-600 leading-relaxed italic">
+                                "Nye regler for generationsskiftebeskatning. Behov for rettidig formuestrukturering."
                             </td>
-                            <td class="px-8 py-10 font-bold text-slate-800 tracking-tight">0.8M - 1.2M DKK</td>
-                            <td class="px-8 py-10">
-                                <div class="w-32 bg-gray-100 h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-bb-teal h-full" style="width: 90%"></div>
+                            <td class="px-10 py-10 font-medium text-slate-800 italic">1.8M DKK</td>
+                            <td class="px-10 py-10">
+                                <div class="w-24 bg-gray-100 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-bb-teal h-full" style="width: 95%"></div>
                                 </div>
-                                <span class="text-[10px] font-bold mt-1 block">90% (Active Client)</span>
+                                <span class="text-[10px] font-bold text-gray-400 mt-2 block tracking-tighter">95% - ACTIVE CLIENT</span>
                             </td>
-                            <td class="px-8 py-10 text-right">
-                                <button onclick="copyText('p3')" class="bg-black text-white text-[10px] font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all uppercase tracking-widest">Execute Pitch</button>
-                                <div id="p3" class="hidden">De nye skatteregler kan påvirke jeres generationsskifte markant. Skal vi gennemgå strategien?</div>
+                            <td class="px-10 py-10 text-right">
+                                <button onclick="copyText('p3')" class="bg-black text-white text-[10px] font-bold py-3.5 px-8 rounded-xl hover:bg-slate-800 transition-all uppercase tracking-widest shadow-lg shadow-gray-200 group-hover:-translate-y-1">Execute Pitch</button>
+                                <div id="p3" class="hidden">Har I overvejet konsekvenserne af de nye skatteregler for jeres kommende generationsskifte?</div>
                             </td>
                         </tr>
                     </tbody>
@@ -159,38 +160,75 @@
     </div>
 
     <div id="page2" class="hidden-page">
-        <main class="max-w-[1600px] mx-auto px-10 py-10">
-            <h2 class="text-3xl font-bold mb-8">Partner Portfolio Analysis</h2>
-            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+        <main class="max-w-[1600px] mx-auto px-12 py-12">
+            <div class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-4xl font-bold tracking-tight text-slate-900 mb-3 italic">Partner Portfolio Analysis</h2>
+                    <p class="text-gray-400">Specific case assignment and ownership tracking.</p>
+                </div>
+                
+                <div class="relative inline-block text-left">
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Select Lead Partner</label>
+                    <select onchange="filterPartner(this.value)" class="bg-white border border-gray-200 text-sm font-semibold py-3 px-6 pr-10 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-bb-teal appearance-none cursor-pointer">
+                        <option value="all">View All Partners</option>
+                        <option value="steen">Steen Petersen (M&A)</option>
+                        <option value="anne">Anne Lund (ESG)</option>
+                        <option value="morten">Morten Jensen (Restructuring)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-[2rem] card-shadow border border-gray-50 overflow-hidden">
                 <table class="w-full text-left">
-                    <thead class="bg-slate-50 border-b border-gray-100 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                        <tr><th class="px-8 py-5">Opportunity Area</th><th class="px-8 py-5">Responsible Partner</th><th class="px-8 py-5 text-right">Decision</th></tr>
+                    <thead class="bg-slate-50/50 border-b border-gray-100">
+                        <tr class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                            <th class="px-10 py-6">Lead Partner</th>
+                            <th class="px-10 py-6">Focus Area</th>
+                            <th class="px-10 py-6">Pipeline Value</th>
+                            <th class="px-10 py-6 text-right">Management</th>
+                        </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-50">
-                        <tr class="hover:bg-slate-50 transition-all">
-                            <td class="px-8 py-10 font-bold text-lg">M&A (Tech)</td>
-                            <td class="px-8 py-10">
-                                <div class="flex items-center space-x-3 text-sm font-semibold">
-                                    <div class="h-10 w-10 rounded-full bg-bb-teal/10 flex items-center justify-center text-bb-teal">SP</div>
-                                    <span>Steen Petersen</span>
+                    <tbody class="divide-y divide-gray-50" id="partner-table-body">
+                        <tr class="partner-row steen hover:bg-slate-50/50 transition-all">
+                            <td class="px-10 py-10">
+                                <div class="flex items-center space-x-4">
+                                    <div class="h-12 w-12 rounded-full bg-bb-teal/10 flex items-center justify-center text-bb-teal font-bold tracking-tighter">SP</div>
+                                    <span class="font-bold text-lg">Steen Petersen</span>
                                 </div>
                             </td>
-                            <td class="px-8 py-10 text-right space-x-3">
-                                <button onclick="alert('Assigned to Associate')" class="bg-white border border-gray-200 text-[10px] font-bold py-3 px-6 rounded-xl uppercase">Delegate</button>
-                                <button onclick="alert('Case Discarded')" class="bg-white border border-red-100 text-red-500 text-[10px] font-bold py-3 px-6 rounded-xl uppercase">Discard</button>
+                            <td class="px-10 py-10 text-sm font-medium text-slate-600 tracking-wide uppercase">M&A / Tech Industry</td>
+                            <td class="px-10 py-10 font-bold text-slate-800">12.4M DKK</td>
+                            <td class="px-10 py-10 text-right space-x-3 whitespace-nowrap">
+                                <button onclick="alert('Assigned to Associate')" class="bg-white border border-gray-200 text-[10px] font-bold py-3 px-6 rounded-xl uppercase tracking-widest hover:bg-gray-50 transition">Delegate</button>
+                                <button onclick="alert('Case Discarded')" class="bg-white border border-red-50 text-red-500 text-[10px] font-bold py-3 px-6 rounded-xl uppercase tracking-widest hover:bg-red-50 transition">Discard</button>
                             </td>
                         </tr>
-                        <tr class="hover:bg-slate-50 transition-all">
-                            <td class="px-8 py-10 font-bold text-lg">Restructuring</td>
-                            <td class="px-8 py-10">
-                                <div class="flex items-center space-x-3 text-sm font-semibold">
-                                    <div class="h-10 w-10 rounded-full bg-bb-teal/10 flex items-center justify-center text-bb-teal">ML</div>
-                                    <span>Morten Lund</span>
+                        <tr class="partner-row anne hover:bg-slate-50/50 transition-all">
+                            <td class="px-10 py-10">
+                                <div class="flex items-center space-x-4">
+                                    <div class="h-12 w-12 rounded-full bg-bb-teal/10 flex items-center justify-center text-bb-teal font-bold tracking-tighter">AL</div>
+                                    <span class="font-bold text-lg">Anne Lund</span>
                                 </div>
                             </td>
-                            <td class="px-8 py-10 text-right space-x-3">
-                                <button onclick="alert('Assigned to Associate')" class="bg-white border border-gray-200 text-[10px] font-bold py-3 px-6 rounded-xl uppercase">Delegate</button>
-                                <button onclick="alert('Case Discarded')" class="bg-white border border-red-100 text-red-500 text-[10px] font-bold py-3 px-6 rounded-xl uppercase">Discard</button>
+                            <td class="px-10 py-10 text-sm font-medium text-slate-600 tracking-wide uppercase">ESG / Compliance</td>
+                            <td class="px-10 py-10 font-bold text-slate-800">8.2M DKK</td>
+                            <td class="px-10 py-10 text-right space-x-3 whitespace-nowrap">
+                                <button onclick="alert('Assigned to Associate')" class="bg-white border border-gray-200 text-[10px] font-bold py-3 px-6 rounded-xl uppercase tracking-widest hover:bg-gray-50 transition">Delegate</button>
+                                <button onclick="alert('Case Discarded')" class="bg-white border border-red-50 text-red-500 text-[10px] font-bold py-3 px-6 rounded-xl uppercase tracking-widest hover:bg-red-50 transition">Discard</button>
+                            </td>
+                        </tr>
+                        <tr class="partner-row morten hover:bg-slate-50/50 transition-all">
+                            <td class="px-10 py-10">
+                                <div class="flex items-center space-x-4">
+                                    <div class="h-12 w-12 rounded-full bg-bb-teal/10 flex items-center justify-center text-bb-teal font-bold tracking-tighter">MJ</div>
+                                    <span class="font-bold text-lg">Morten Jensen</span>
+                                </div>
+                            </td>
+                            <td class="px-10 py-10 text-sm font-medium text-slate-600 tracking-wide uppercase">Restructuring</td>
+                            <td class="px-10 py-10 font-bold text-slate-800">11.8M DKK</td>
+                            <td class="px-10 py-10 text-right space-x-3 whitespace-nowrap">
+                                <button onclick="alert('Assigned to Associate')" class="bg-white border border-gray-200 text-[10px] font-bold py-3 px-6 rounded-xl uppercase tracking-widest hover:bg-gray-50 transition">Delegate</button>
+                                <button onclick="alert('Case Discarded')" class="bg-white border border-red-50 text-red-500 text-[10px] font-bold py-3 px-6 rounded-xl uppercase tracking-widest hover:bg-red-50 transition">Discard</button>
                             </td>
                         </tr>
                     </tbody>
@@ -208,10 +246,9 @@
         }
 
         function filterSelection(c) {
-            var x, i;
-            x = document.getElementsByClassName("opportunity-row");
+            var x = document.getElementsByClassName("opportunity-row");
             if (c == "all") c = "";
-            for (i = 0; i < x.length; i++) {
+            for (var i = 0; i < x.length; i++) {
                 x[i].classList.add("hidden");
                 if (x[i].className.indexOf(c) > -1) x[i].classList.remove("hidden");
             }
@@ -222,9 +259,19 @@
             event.currentTarget.classList.add("active");
         }
 
+        function filterPartner(name) {
+            var x = document.getElementsByClassName("partner-row");
+            if (name == "all") {
+                for (var i = 0; i < x.length; i++) x[i].classList.remove("hidden");
+            } else {
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.add("hidden");
+                    if (x[i].className.indexOf(name) > -1) x[i].classList.remove("hidden");
+                }
+            }
+        }
+
         function copyText(id) {
-            const text = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(text);
             alert("Partner Pitch kopieret til udklipsholder.");
         }
     </script>
