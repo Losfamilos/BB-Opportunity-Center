@@ -1,625 +1,1096 @@
 <!DOCTYPE html>
 <html lang="da" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bech-Bruun | Quantum Intelligence OS</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Bech-Bruun | Executive Intelligence Platform</title>
 
-    <style>
-        :root {
-            --bb-teal: #00d7b9;
-            --bb-teal-muted: rgba(0, 215, 185, 0.1);
-            --bb-slate-900: #0f172a;
-            --bb-slate-800: #1e293b;
-            --bb-gold: #c5a059;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #020617;
-            color: #f1f5f9;
-            letter-spacing: -0.01em;
-            overflow: hidden;
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .serif { font-family: 'Playfair Display', serif; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fafaf9;
+      color: #1c1917;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.011em;
+    }
 
-        .glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
+    .serif {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
 
-        .nav-item {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 0px solid var(--bb-teal);
-        }
-        .nav-item.active {
-            background: linear-gradient(90deg, var(--bb-teal-muted) 0%, transparent 100%);
-            color: var(--bb-teal);
-            border-left: 4px solid var(--bb-teal);
-            padding-left: 1.5rem;
-        }
+    .card {
+      background: white;
+      border: 1px solid #e7e5e4;
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 8px 24px -8px rgba(0, 0, 0, 0.04);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .opp-card {
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .opp-card:hover {
-            transform: translateY(-10px) scale(1.01);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--bb-teal);
-        }
+    .card:hover {
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.04),
+        0 16px 40px -12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+      border-color: #d6d3d1;
+    }
 
-        .progress-fill {
-            transition: width 2s cubic-bezier(0.65, 0, 0.35, 1);
-        }
+    .accent-primary { color: #115e59; }
+    .bg-accent-primary { background-color: #115e59; }
 
-        @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-200%); }
-        }
-        .ticker-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 50s linear infinite;
-        }
+    .badge {
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--bb-slate-800); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--bb-teal); }
+    .badge-critical {
+      background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+      color: white;
+    }
 
-        .view-section { display: none; opacity: 0; transform: translateY(20px); }
-        .view-section.active { display: block; opacity: 1; transform: translateY(0); transition: all 0.6s ease-out; }
+    .badge-high {
+      background: linear-gradient(135deg, #92400e 0%, #a16207 100%);
+      color: white;
+    }
 
-        .float-ai { animation: float 6s ease-in-out infinite; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-    </style>
+    .badge-opportunity {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-automated {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .btn {
+      font-weight: 500;
+      padding: 0.8rem 1.9rem;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 0.9375rem;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: #115e59;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0f4c47;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(17, 94, 89, 0.25);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #292524;
+      border: 1.5px solid #e7e5e4;
+    }
+
+    .btn-secondary:hover {
+      border-color: #115e59;
+      color: #115e59;
+      background: #f0fdfa;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #57534e;
+      padding: 0.6rem 1.2rem;
+    }
+
+    .btn-ghost:hover {
+      background: #fafaf9;
+      color: #115e59;
+    }
+
+    .value-primary {
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: -0.05em;
+      color: #115e59;
+      font-family: 'Crimson Pro', serif;
+      line-height: 1;
+    }
+
+    .value-secondary {
+      font-size: 2.75rem;
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      color: #1c1917;
+      font-family: 'Crimson Pro', serif;
+      line-height: 1;
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 0.1s; opacity: 0; }
+    .delay-200 { animation-delay: 0.2s; opacity: 0; }
+    .delay-300 { animation-delay: 0.3s; opacity: 0; }
+    .delay-400 { animation-delay: 0.4s; opacity: 0; }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, #e7e5e4 20%, #e7e5e4 80%, transparent 100%);
+      margin: 4rem 0;
+    }
+
+    .pulse-indicator {
+      width: 6px;
+      height: 6px;
+      background: #991b1b;
+      border-radius: 50%;
+      animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.1); }
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: #f5f5f4;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #115e59 0%, #14b8a6 100%);
+      border-radius: 2px;
+      transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .status-border { border-left: 3px solid; }
+    .status-critical { border-color: #991b1b; }
+    .status-high { border-color: #92400e; }
+    .status-opportunity { border-color: #115e59; }
+    .status-info { border-color: #1e40af; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #fafaf9; }
+    ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
+
+    .source-tag {
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: #57534e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .intelligence-item {
+      padding: 1.25rem;
+      border-left: 2px solid #f5f5f4;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .intelligence-item:hover {
+      border-left-color: #115e59;
+      background: #fafaf9;
+    }
+
+    .crm-badge {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .insight-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #115e59, transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .insight-card:hover::before { opacity: 1; }
+
+    .value-highlight {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border-left: 3px solid #10b981;
+    }
+
+    .zero-effort {
+      background: linear-gradient(90deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1px solid #bbf7d0;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    /* Small helper for "Partner-safe" CTA */
+    .pill-safe {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #0f172a;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+  </style>
 </head>
-<body class="h-screen flex flex-col">
 
-    <div class="h-10 bg-black/80 border-b border-white/5 flex items-center overflow-hidden z-[100]">
-        <div class="ticker-content flex items-center space-x-24">
-            <span class="flex items-center text-[10px] font-bold text-white/40 tracking-[0.3em] uppercase">
-                <span class="w-1.5 h-1.5 bg-teal-400 rounded-full mr-4 animate-pulse"></span>
-                MARKET INTELLIGENCE: Logistics Sector Consolidation Active in Nordics
-            </span>
-            <span class="flex items-center text-[10px] font-bold text-white/40 tracking-[0.3em] uppercase">
-                <span class="w-1.5 h-1.5 bg-amber-500 rounded-full mr-4"></span>
-                LITIGATION ALERT: New High Court Precedent in IP Rights Case
-            </span>
-            <span class="flex items-center text-[10px] font-bold text-white/40 tracking-[0.3em] uppercase">
-                <span class="w-1.5 h-1.5 bg-teal-400 rounded-full mr-4"></span>
-                C-SUITE MOVE: Maersk CFO transition creates advisory window
-            </span>
+<body>
+  <!-- Header -->
+  <header class="bg-white border-b border-stone-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+    <div class="max-w-[1800px] mx-auto px-16 py-7 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <div>
+          <h1 class="serif text-[2rem] text-stone-900 tracking-tight">Bech-Bruun</h1>
+          <p class="text-[0.6875rem] font-medium text-stone-500 tracking-wider uppercase mt-0.5">Executive Intelligence Platform</p>
         </div>
+      </div>
+
+      <div class="flex items-center space-x-10">
+        <!-- Partner Switcher + Upside Snapshot -->
+        <div class="flex items-center space-x-4">
+          <div class="px-4 py-2 bg-stone-50 rounded-lg border border-stone-200">
+            <p class="text-[0.65rem] font-semibold text-stone-500 uppercase tracking-wider">Partner view</p>
+            <div class="flex items-center space-x-2 mt-1">
+              <select id="partnerSelect" class="text-sm font-semibold text-stone-900 bg-transparent outline-none">
+                <option value="camilla" selected>Camilla Huus</option>
+                <option value="morten">Morten L.</option>
+                <option value="sara">Sara K.</option>
+              </select>
+              <span id="partnerBadge" class="badge badge-automated">Upside only</span>
+            </div>
+          </div>
+
+          <div class="px-4 py-2 bg-emerald-50 rounded-lg border border-emerald-100">
+            <p class="text-[0.65rem] font-semibold text-emerald-700 uppercase tracking-wider">Din upside (7 dage)</p>
+            <div class="flex items-baseline space-x-2 mt-1">
+              <p id="partnerUpside" class="text-lg font-semibold text-emerald-800">+2.4M</p>
+              <p id="partnerTimeSaved" class="text-xs text-emerald-700">• 11.3h sparet</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 px-4 py-2 bg-blue-50 rounded-lg border border-blue-100">
+          <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+          <span class="crm-badge">Live CRM Integration</span>
+          <span class="text-xs text-blue-700 font-medium">Synced 2 min ago</span>
+        </div>
+
+        <div class="text-right">
+          <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider">Tirsdag</p>
+          <p class="text-sm font-medium text-stone-700">13. Januar 2026 • 09:42</p>
+        </div>
+
+        <div class="h-10 w-px bg-stone-200"></div>
+
+        <div class="flex items-center space-x-4">
+          <div>
+            <p class="text-sm font-semibold text-stone-900 text-right">Camilla Huus</p>
+            <p class="text-xs text-stone-500 text-right">Chief Operating Officer</p>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-800 to-teal-900 flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white">
+            CH
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-[1800px] mx-auto px-16 py-14">
+    <!-- Value Proposition Banner -->
+    <div class="value-highlight rounded-2xl p-8 mb-10 animate-in">
+      <div class="flex items-start justify-between">
+        <div class="flex-1">
+          <div class="flex items-center space-x-3 mb-3">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold text-emerald-900">Zero-Effort Revenue Generation</h3>
+            <span class="pill-safe">
+              <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Partner-safe: ingen pres
+            </span>
+          </div>
+          <p class="text-stone-700 leading-relaxed max-w-4xl">
+            Systemet genererer automatisk kvalificerede leads fra 40+ datakilder (CVR, LinkedIn, årsrapporter, markedsdata, nyhedsfeeds) og præsenterer kun opportunities med 70%+ win-probability.
+            <strong>Partners bruger max 15 minutter dagligt på high-value decisions—alt andet er automatiseret.</strong>
+            CRM-integration sikrer at alle aktiviteter trackes uden manuel input.
+          </p>
+        </div>
+        <div class="text-right flex-shrink-0 ml-8">
+          <p class="text-sm font-semibold text-emerald-700 mb-1">Partner time saved today</p>
+          <p class="text-5xl font-light text-emerald-600">6.2h</p>
+          <p class="text-xs text-stone-600 mt-2">= 93k DKK i opportunity cost</p>
+        </div>
+      </div>
     </div>
 
-    <div class="flex flex-1 overflow-hidden">
-        
-        <aside class="w-80 bg-[#010410] border-r border-white/5 flex flex-col p-10 z-50">
-            <div class="mb-20">
-                <div class="flex items-center space-x-1">
-                    <span class="text-3xl font-extrabold italic tracking-tighter text-white">Bech</span>
-                    <span class="text-3xl font-light italic tracking-tighter text-teal-400">Bruun</span>
-                </div>
-                <p class="text-[9px] font-black text-white/20 tracking-[0.5em] mt-3 uppercase">Quantum OS v3.0</p>
-            </div>
+    <!-- RAG Trust Bar -->
+    <div class="card rounded-2xl p-6 mb-10 animate-in delay-100">
+      <div class="flex items-start justify-between gap-8">
+        <div class="flex-1">
+          <div class="flex items-center flex-wrap gap-2 mb-2">
+            <span class="badge badge-opportunity" id="ragStatusPill">
+              <div class="w-1.5 h-1.5 bg-teal-700 rounded-full"></div>
+              RAG: GREEN
+            </span>
+            <span class="text-xs text-stone-500">•</span>
+            <span class="text-xs font-medium text-stone-600" id="ragFreshness">Freshness: 0–2 dage</span>
+            <span class="text-xs text-stone-500">•</span>
+            <span class="text-xs font-medium text-stone-600" id="ragCoverage">Coverage: 8/10 essentials</span>
+            <span class="text-xs text-stone-500">•</span>
+            <span class="text-xs font-medium text-stone-600">Audit: citations + diff</span>
+          </div>
 
-            <nav class="space-y-6 flex-1">
-                <button onclick="changeView('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center text-sm font-bold">
-                    <svg class="w-5 h-5 mr-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
-                    Strategic Dashboard
-                </button>
-                <button onclick="changeView('opportunities')" id="nav-opportunities" class="nav-item w-full flex items-center text-white/40 hover:text-white text-sm font-bold">
-                    <svg class="w-5 h-5 mr-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    Opportunity Engine
-                </button>
-                <button onclick="changeView('warroom')" id="nav-warroom" class="nav-item w-full flex items-center text-white/40 hover:text-white text-sm font-bold">
-                    <svg class="w-5 h-5 mr-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    Partner War Room
-                </button>
-                <button onclick="changeView('clients')" id="nav-clients" class="nav-item w-full flex items-center text-white/40 hover:text-white text-sm font-bold">
-                    <svg class="w-5 h-5 mr-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    Global Client Map
-                </button>
-            </nav>
+          <p class="text-sm text-stone-700 leading-relaxed">
+            RAG-laget gør anbefalinger <strong>forklarlige og trygge</strong>: kilder, freshness, coverage og “hvad mangler?” vises tydeligt.
+            Partneren kan handle — eller lade platformen køre videre som <strong>Monitoring</strong> (alt logges i CRM).
+          </p>
 
-            <div class="mt-auto pt-10 border-t border-white/5">
-                <div class="glass-panel p-6 rounded-[2rem] float-ai">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-[9px] font-black text-teal-400 uppercase tracking-widest">Quantum AI</span>
-                        <div class="w-2 h-2 bg-teal-400 rounded-full animate-ping"></div>
-                    </div>
-                    <p class="text-[11px] leading-relaxed text-white/50 italic font-medium">
-                        "Partner, 3 kilder bekræfter forestående frasalg i Energy-porteføljen hos Novo. Skal jeg klargøre pitch?"
-                    </p>
-                </div>
-                
-                <div class="mt-10 flex items-center space-x-5">
-                    <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center font-black text-black text-sm italic">JA</div>
-                    <div>
-                        <p class="text-xs font-bold text-white italic">Jeppe Astrupgaard</p>
-                        <p class="text-[10px] text-white/20 font-black uppercase tracking-tighter">Commercial Excellence</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
+          <div class="flex flex-wrap gap-2 mt-4" id="ragSources">
+            <span class="source-tag">CVR</span>
+            <span class="source-tag">Årsrapport</span>
+            <span class="source-tag">LinkedIn</span>
+            <span class="source-tag">News</span>
+            <span class="source-tag">Internal CRM notes</span>
+          </div>
+        </div>
 
-        <main class="flex-1 overflow-y-auto p-16 bg-[#020617] relative">
-            
-            <section id="view-dashboard" class="view-section active">
-                <header class="flex justify-between items-end mb-16">
-                    <div>
-                        <h2 class="serif text-6xl italic font-bold text-white tracking-tighter">Command Center</h2>
-                        <p class="text-white/40 mt-4 text-lg font-medium">Velkommen tilbage, Partner. Her er dit overblik over firmaets performance.</p>
-                    </div>
-                    <div class="glass-panel px-8 py-4 rounded-3xl flex items-center space-x-10">
-                        <div class="text-center">
-                            <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Realization</p>
-                            <p class="text-xl font-bold italic text-teal-400">94.2%</p>
-                        </div>
-                        <div class="w-px h-10 bg-white/10"></div>
-                        <div class="text-center">
-                            <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Lock-up Days</p>
-                            <p class="text-xl font-bold italic text-white">42</p>
-                        </div>
-                    </div>
-                </header>
+        <div class="text-right min-w-[320px]">
+          <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">RAG Confidence</p>
+          <p class="value-secondary text-stone-900 mb-2" id="ragConfidence">94%</p>
 
-                <div class="grid grid-cols-4 gap-8 mb-16">
-                    <div class="glass-panel p-10 rounded-[3rem] relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity">
-                            <svg class="w-24 h-24 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
-                        </div>
-                        <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-4">Total Pipeline AUM</p>
-                        <h3 class="text-5xl font-extrabold italic tracking-tighter text-white">142.5<span class="text-lg not-italic text-teal-400 ml-2">M</span></h3>
-                        <div class="mt-8 flex items-center text-[10px] font-bold text-emerald-400">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path></svg>
-                            +18% vs. sidste kvartal
-                        </div>
-                    </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="ragConfidenceBar" style="width: 94%"></div>
+          </div>
 
-                    <div class="glass-panel p-10 rounded-[3rem] border-b-4 border-teal-400">
-                        <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-4">Billable Hours (Team)</p>
-                        <h3 class="text-5xl font-extrabold italic tracking-tighter text-white">1,240</h3>
-                        <div class="mt-8 space-y-3">
-                            <div class="flex justify-between text-[9px] font-bold uppercase">
-                                <span class="text-white/40">Target Pace</span>
-                                <span class="text-white">85%</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                                <div class="h-full bg-teal-400 progress-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel p-10 rounded-[3rem]">
-                        <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-4">Client Satisfaction (NPS)</p>
-                        <h3 class="text-5xl font-extrabold italic tracking-tighter text-white">74<span class="text-lg not-italic text-teal-400 ml-2">/100</span></h3>
-                        <div class="mt-8 flex -space-x-3">
-                            <div class="w-10 h-10 rounded-full border-4 border-[#020617] bg-slate-800 flex items-center justify-center text-[10px] font-bold">JD</div>
-                            <div class="w-10 h-10 rounded-full border-4 border-[#020617] bg-teal-400 flex items-center justify-center text-[10px] font-bold text-black">TL</div>
-                            <div class="w-10 h-10 rounded-full border-4 border-[#020617] bg-slate-700 flex items-center justify-center text-[10px] font-bold">+12</div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel p-10 rounded-[3rem] bg-teal-400/5">
-                        <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.3em] mb-4">Strategic Hooks</p>
-                        <h3 class="text-5xl font-extrabold italic tracking-tighter text-white">08</h3>
-                        <p class="mt-8 text-[11px] text-white/40 italic leading-relaxed">Nye markedstriggere kræver din opmærksomhed i dag.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-12 gap-12">
-                    <div class="col-span-8 glass-panel p-12 rounded-[4rem]">
-                        <div class="flex justify-between items-center mb-12">
-                            <h4 class="serif text-3xl italic text-white tracking-tight">Revenue Dynamics</h4>
-                            <div class="flex space-x-4">
-                                <button class="px-4 py-2 rounded-xl bg-white/5 text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white">6 Måneder</button>
-                                <button class="px-4 py-2 rounded-xl bg-teal-400/10 text-[10px] font-bold uppercase tracking-widest text-teal-400">12 Måneder</button>
-                            </div>
-                        </div>
-                        <div class="h-[400px] w-full">
-                            <canvas id="revenueChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="col-span-4 space-y-8">
-                        <h4 class="text-xs font-black text-white/20 uppercase tracking-[0.4em] px-4">Sector Momentum</h4>
-                        <div class="glass-panel p-8 rounded-[3rem] space-y-8">
-                            <div class="group cursor-pointer">
-                                <div class="flex justify-between items-end mb-4">
-                                    <div>
-                                        <p class="text-sm font-bold text-white italic">Life Science</p>
-                                        <p class="text-[9px] text-white/30 uppercase font-black">12 Active Mandates</p>
-                                    </div>
-                                    <span class="text-teal-400 font-bold italic">+24%</span>
-                                </div>
-                                <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-teal-400 group-hover:w-full transition-all duration-1000" style="width: 70%"></div>
-                                </div>
-                            </div>
-
-                            <div class="group cursor-pointer">
-                                <div class="flex justify-between items-end mb-4">
-                                    <div>
-                                        <p class="text-sm font-bold text-white italic">Renewable Energy</p>
-                                        <p class="text-[9px] text-white/30 uppercase font-black">18 Active Mandates</p>
-                                    </div>
-                                    <span class="text-emerald-400 font-bold italic">+42%</span>
-                                </div>
-                                <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-emerald-400 group-hover:w-full transition-all duration-1000" style="width: 85%"></div>
-                                </div>
-                            </div>
-
-                            <div class="group cursor-pointer">
-                                <div class="flex justify-between items-end mb-4">
-                                    <div>
-                                        <p class="text-sm font-bold text-white italic">Real Estate</p>
-                                        <p class="text-[9px] text-white/30 uppercase font-black">6 Active Mandates</p>
-                                    </div>
-                                    <span class="text-red-400 font-bold italic">-8%</span>
-                                </div>
-                                <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-red-400 group-hover:w-full transition-all duration-1000" style="width: 30%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900/50 border border-white/5 p-10 rounded-[3rem] relative overflow-hidden">
-                            <div class="relative z-10">
-                                <h5 class="text-xs font-black text-teal-400 uppercase tracking-widest mb-4">Næste Bestyrelsesmøde</h5>
-                                <p class="text-2xl font-bold italic text-white mb-2">Torsdag, 15. Jan</p>
-                                <p class="text-sm text-white/40 italic">Agenda: Strategisk vækst i DACH-regionen.</p>
-                            </div>
-                            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal-400/5 rounded-full blur-3xl"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="view-opportunities" class="view-section">
-                <div class="flex justify-between items-center mb-16">
-                    <h2 class="serif text-5xl italic font-bold text-white tracking-tighter">Opportunity Engine</h2>
-                    <div class="flex space-x-4">
-                        <input type="text" placeholder="Søg i CVR eller Sector..." class="bg-white/5 border border-white/10 rounded-2xl px-8 py-4 text-sm focus:ring-2 focus:ring-teal-400 outline-none text-white w-80 italic">
-                        <button class="bg-teal-400 text-black px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-transform">Run Deep Scan</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-12">
-                    <div class="opp-card glass-panel p-12 rounded-[4rem] relative group">
-                        <div class="flex justify-between items-start mb-10">
-                            <span class="px-5 py-2 rounded-full bg-teal-400 text-black text-[9px] font-black uppercase tracking-tighter">98% Lead Quality</span>
-                            <div class="text-right">
-                                <p class="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Estimated Value</p>
-                                <p class="text-2xl font-bold italic text-white">4.2M DKK</p>
-                            </div>
-                        </div>
-                        <h4 class="text-4xl font-extrabold italic text-white tracking-tighter mb-4 uppercase">Project Nordic Blue</h4>
-                        <p class="text-white/40 italic text-sm leading-relaxed mb-10 max-w-lg">
-                            "AI-analyse af selskabets seneste årsrapport viser et markant fald i likviditet kombineret med en stærk IP-portefølje. Perfekt target for frasalg eller rekonstruktion."
-                        </p>
-                        <div class="grid grid-cols-3 gap-6 mb-10">
-                            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                <p class="text-[8px] font-black text-white/20 uppercase mb-1">Sector</p>
-                                <p class="text-[10px] font-bold text-white italic tracking-tight uppercase">Robotics / Tech</p>
-                            </div>
-                            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                <p class="text-[8px] font-black text-white/20 uppercase mb-1">Conflict Check</p>
-                                <p class="text-[10px] font-bold text-emerald-400 italic tracking-tight uppercase">Clean</p>
-                            </div>
-                            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                <p class="text-[8px] font-black text-white/20 uppercase mb-1">Lead Partner</p>
-                                <p class="text-[10px] font-bold text-teal-400 italic tracking-tight uppercase">Morten L.</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button class="flex-1 py-5 bg-white text-black text-[10px] font-black uppercase rounded-2xl tracking-widest">Draft Pitch</button>
-                            <button class="flex-1 py-5 border border-white/20 text-white text-[10px] font-black uppercase rounded-2xl tracking-widest">Assign Associate</button>
-                        </div>
-                    </div>
-
-                    <div class="opp-card glass-panel p-12 rounded-[4rem] relative group">
-                        <div class="flex justify-between items-start mb-10">
-                            <span class="px-5 py-2 rounded-full bg-amber-500 text-black text-[9px] font-black uppercase tracking-tighter">82% Lead Quality</span>
-                            <div class="text-right">
-                                <p class="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Estimated Value</p>
-                                <p class="text-2xl font-bold italic text-white">1.5M DKK</p>
-                            </div>
-                        </div>
-                        <h4 class="text-4xl font-extrabold italic text-white tracking-tighter mb-4 uppercase italic">GreenFuel Global</h4>
-                        <p class="text-white/40 italic text-sm leading-relaxed mb-10 max-w-lg">
-                            "Virksomheden står over for nye EU-regler om ESG-rapportering d. 1. juli. Mangler pt. en strategisk compliance-partner."
-                        </p>
-                        <div class="grid grid-cols-3 gap-6 mb-10">
-                            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                <p class="text-[8px] font-black text-white/20 uppercase mb-1">Sector</p>
-                                <p class="text-[10px] font-bold text-white italic tracking-tight uppercase">ESG / Energy</p>
-                            </div>
-                            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                <p class="text-[8px] font-black text-white/20 uppercase mb-1">Conflict Check</p>
-                                <p class="text-[10px] font-bold text-emerald-400 italic tracking-tight uppercase">Clean</p>
-                            </div>
-                            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                <p class="text-[8px] font-black text-white/20 uppercase mb-1">Lead Partner</p>
-                                <p class="text-[10px] font-bold text-teal-400 italic tracking-tight uppercase">Sara V.</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button class="flex-1 py-5 bg-white text-black text-[10px] font-black uppercase rounded-2xl tracking-widest">Draft Pitch</button>
-                            <button class="flex-1 py-5 border border-white/20 text-white text-[10px] font-black uppercase rounded-2xl tracking-widest">Assign Associate</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="view-warroom" class="view-section">
-                <header class="mb-16">
-                    <h2 class="serif text-5xl italic font-bold text-white tracking-tighter uppercase">The War Room</h2>
-                    <p class="text-white/40 mt-4 text-lg font-medium italic">Cross-departmental collaboration on high-stakes mandates.</p>
-                </header>
-
-                <div class="grid grid-cols-12 gap-12">
-                    <div class="col-span-4 space-y-6">
-                        <h4 class="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-6">Active Task Forces</h4>
-                        
-                        <div class="glass-panel p-6 rounded-3xl border-l-4 border-teal-400 hover:bg-white/5 transition-colors cursor-pointer">
-                            <div class="flex justify-between items-start mb-4">
-                                <p class="text-sm font-bold text-white italic">Project "Titan" Merger</p>
-                                <span class="bg-emerald-500/20 text-emerald-400 text-[8px] font-black px-2 py-1 rounded">ON TRACK</span>
-                            </div>
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-700 flex items-center justify-center text-[8px] font-bold">JA</div>
-                                <div class="w-8 h-8 rounded-full border-2 border-[#020617] bg-teal-400 flex items-center justify-center text-[8px] font-bold text-black">MS</div>
-                                <div class="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-800 flex items-center justify-center text-[8px] font-bold">+3</div>
-                            </div>
-                        </div>
-
-                        <div class="glass-panel p-6 rounded-3xl border-l-4 border-red-500 hover:bg-white/5 transition-colors cursor-pointer opacity-60">
-                            <div class="flex justify-between items-start mb-4">
-                                <p class="text-sm font-bold text-white italic">SkyPower IP Litigation</p>
-                                <span class="bg-red-500/20 text-red-400 text-[8px] font-black px-2 py-1 rounded">CRITICAL DEADLINE</span>
-                            </div>
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-700 flex items-center justify-center text-[8px] font-bold">KV</div>
-                                <div class="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-800 flex items-center justify-center text-[8px] font-bold">+1</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-8 glass-panel p-12 rounded-[4rem] relative overflow-hidden">
-                        <div class="flex justify-between items-center mb-10">
-                            <h3 class="text-2xl font-bold italic text-white uppercase tracking-tighter">Resource Distribution</h3>
-                            <p class="text-[10px] font-bold text-teal-400 uppercase tracking-widest">Live Optimization</p>
-                        </div>
-                        <div class="h-80 w-full">
-                            <canvas id="warRoomChart"></canvas>
-                        </div>
-                        <div class="mt-10 grid grid-cols-3 gap-8 border-t border-white/5 pt-10">
-                            <div>
-                                <p class="text-[9px] font-black text-white/20 uppercase mb-2">Associate Utilization</p>
-                                <p class="text-2xl font-bold text-white italic">82%</p>
-                            </div>
-                            <div>
-                                <p class="text-[9px] font-black text-white/20 uppercase mb-2">Avg. Response Time</p>
-                                <p class="text-2xl font-bold text-white italic">1.4h</p>
-                            </div>
-                            <div>
-                                <p class="text-[9px] font-black text-white/20 uppercase mb-2">Doc Review Velocity</p>
-                                <p class="text-2xl font-bold text-teal-400 italic">2,400p/d</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="view-clients" class="view-section">
-                <header class="mb-16">
-                    <h2 class="serif text-5xl italic font-bold text-white tracking-tighter uppercase">Global Client Intelligence</h2>
-                    <p class="text-white/40 mt-4 text-lg font-medium italic">Tracking Bech-Bruun's influence across international markets.</p>
-                </header>
-
-                <div class="glass-panel w-full h-[600px] rounded-[4rem] relative flex items-center justify-center overflow-hidden">
-                    <div class="absolute inset-0 opacity-20 flex items-center justify-center">
-                        <svg class="w-full h-full text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    
-                    <div class="relative z-10 grid grid-cols-3 gap-20">
-                        <div class="text-center group cursor-pointer">
-                            <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.5em] mb-4">Region Hovedstaden</p>
-                            <h5 class="text-6xl font-extrabold italic text-white group-hover:scale-110 transition-transform tracking-tighter">14<span class="text-sm">%</span></h5>
-                            <p class="text-[9px] text-white/30 mt-4 font-bold italic">Market Growth YoY</p>
-                        </div>
-                        <div class="text-center group cursor-pointer">
-                            <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.5em] mb-4">Region Midtjylland</p>
-                            <h5 class="text-6xl font-extrabold italic text-white group-hover:scale-110 transition-transform tracking-tighter">08<span class="text-sm">%</span></h5>
-                            <p class="text-[9px] text-white/30 mt-4 font-bold italic">Tech-M&A Mandates</p>
-                        </div>
-                        <div class="text-center group cursor-pointer">
-                            <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.5em] mb-4">Region Sjælland</p>
-                            <h5 class="text-6xl font-extrabold italic text-white group-hover:scale-110 transition-transform tracking-tighter">22<span class="text-sm">%</span></h5>
-                            <p class="text-[9px] text-white/30 mt-4 font-bold italic">Maritime Advisory</p>
-                        </div>
-                         <div class="text-center group cursor-pointer">
-                            <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.5em] mb-4">Region Nordjylland</p>
-                            <h5 class="text-6xl font-extrabold italic text-white group-hover:scale-110 transition-transform tracking-tighter">28<span class="text-sm">%</span></h5>
-                            <p class="text-[9px] text-white/30 mt-4 font-bold italic">ESG Advisory</p>
-                        </div>
-                         <div class="text-center group cursor-pointer">
-                            <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.5em] mb-4">Region Søndjylland</p>
-                            <h5 class="text-6xl font-extrabold italic text-white group-hover:scale-110 transition-transform tracking-tighter">02<span class="text-sm">%</span></h5>
-                            <p class="text-[9px] text-white/30 mt-4 font-bold italic">Tax Advisory</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </main>
+          <div class="flex items-center justify-end gap-2 mt-4">
+            <button class="btn btn-secondary" onclick="openRagDrawer()">Vis source trail</button>
+            <button class="btn btn-ghost" onclick="toggleMonitoring()">Monitoring: <span id="monitoringState" class="font-semibold">ON</span></button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="toast-container" class="fixed bottom-10 right-10 z-[1000] space-y-4"></div>
+    <!-- Executive Summary Bar -->
+    <div class="grid grid-cols-5 gap-6 mb-14 animate-in delay-100">
+      <div class="card rounded-xl p-7 status-border status-opportunity">
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-[0.6875rem] font-semibold text-stone-500 uppercase tracking-wider">Revenue klar til aktivering</p>
+          <span class="zero-effort text-[0.625rem] font-bold text-emerald-700">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Auto-generated
+          </span>
+        </div>
+        <p class="value-primary mb-2">8.9M</p>
+        <p class="text-xs text-stone-600 leading-relaxed">3 decisions • 15 min total</p>
+      </div>
 
-    <script>
-        function changeView(viewId) {
-            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => {
-                n.classList.remove('active');
-                n.classList.add('text-white/40');
-            });
+      <div class="card rounded-xl p-7">
+        <p class="text-[0.6875rem] font-semibold text-stone-500 uppercase tracking-wider mb-3">Kræver opmærksomhed</p>
+        <p class="value-secondary mb-2">5</p>
+        <p class="text-xs text-stone-600 leading-relaxed">4 tid-sensitive • 1 conflict</p>
+      </div>
 
-            document.getElementById('view-' + viewId).classList.add('active');
-            document.getElementById('nav-' + viewId).classList.add('active');
-            document.getElementById('nav-' + viewId).classList.remove('text-white/40');
-            
-            showToast(`Initializing ${viewId.toUpperCase()} Intelligence...`);
-        }
+      <div class="card rounded-xl p-7 bg-gradient-to-br from-emerald-50 to-white">
+        <p class="text-[0.6875rem] font-semibold text-emerald-700 uppercase tracking-wider mb-3">Automatiseret i dag</p>
+        <p class="value-secondary text-emerald-700 mb-2">47</p>
+        <p class="text-xs text-stone-600 leading-relaxed">34 leads screened • 14 emails sendt</p>
+      </div>
 
-        function showToast(msg) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = "glass-panel p-6 rounded-[1.5rem] border-l-4 border-teal-400 flex items-center space-x-4";
-            toast.innerHTML = `
-                <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></div>
-                <p class="text-[11px] font-bold uppercase tracking-widest text-white/80">${msg}</p>
-            `;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 4000);
-        }
+      <div class="card rounded-xl p-7">
+        <p class="text-[0.6875rem] font-semibold text-stone-500 uppercase tracking-wider mb-3">Pipeline velocity</p>
+        <div class="flex items-baseline space-x-3 mb-3">
+          <p class="value-secondary">186M</p>
+          <span class="text-lg font-semibold text-emerald-600">+24%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 82%"></div>
+        </div>
+      </div>
 
-        const revCtx = document.getElementById('revenueChart').getContext('2d');
-        new Chart(revCtx, {
-            type: 'line',
-            data: {
-                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAJ', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEC'],
-                datasets: [{
-                    label: 'Actual Revenue',
-                    data: [42, 45, 40, 55, 62, 59, 75, 82, 80, 95, 110, 142],
-                    borderColor: '#00d7b9',
-                    borderWidth: 6,
-                    pointBackgroundColor: '#00d7b9',
-                    pointBorderColor: '#020617',
-                    pointBorderWidth: 4,
-                    pointRadius: 6,
-                    pointHoverRadius: 10,
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: (context) => {
-                        const gradient = revCtx.createLinearGradient(0, 0, 0, 400);
-                        gradient.addColorStop(0, 'rgba(0, 215, 185, 0.2)');
-                        gradient.addColorStop(1, 'rgba(0, 215, 185, 0)');
-                        return gradient;
-                    }
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 10, weight: '900' } } },
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 10 } } }
-                }
-            }
-        });
+      <div class="card rounded-xl p-7">
+        <p class="text-[0.6875rem] font-semibold text-stone-500 uppercase tracking-wider mb-3">CRM Health Score</p>
+        <p class="value-secondary text-blue-600 mb-2">94%</p>
+        <p class="text-xs text-stone-600 leading-relaxed">All data synced • No manual entry</p>
+      </div>
+    </div>
 
-        const warCtx = document.getElementById('warRoomChart').getContext('2d');
-        new Chart(warCtx, {
-            type: 'radar',
-            data: {
-                labels: ['M&A', 'Tax', 'Litigation', 'Real Estate', 'Tech', 'ESG', 'Regulatory'],
-                datasets: [{
-                    label: 'Team Allocation',
-                    data: [95, 40, 60, 20, 85, 75],
-                    fill: true,
-                    backgroundColor: 'rgba(0, 215, 185, 0.2)',
-                    borderColor: '#00d7b9',
-                    pointBackgroundColor: '#00d7b9',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(255,255,255,0.1)' },
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        pointLabels: { color: 'rgba(255,255,255,0.5)', font: { size: 10, weight: 'bold' } },
-                        ticks: { display: false }
-                    }
-                },
-                plugins: { legend: { display: false } }
-            }
-        });
+    <!-- Priority Actions -->
+    <section class="mb-20 animate-in delay-200">
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center flex-wrap gap-3">
+          <div class="pulse-indicator"></div>
+          <h2 class="serif text-[2.75rem] text-stone-900 tracking-tight">Kræver din godkendelse</h2>
+          <span class="zero-effort">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"></path>
+            </svg>
+            <span class="text-xs font-bold text-emerald-700">AI har gjort forarbejdet</span>
+          </span>
+          <span class="pill-safe">
+            <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"></path>
+            </svg>
+            Alternativ: Monitoring (0 min)
+          </span>
+        </div>
+        <div class="text-sm text-stone-500">
+          Samlet estimeret tid: <strong class="text-stone-900">~15 minutter</strong>
+        </div>
+      </div>
 
-        const alerts = [
-            "Project Titan: Novo Nordisk data room accessed by team.",
-            "CVR Intelligence: New insolvency filed in Logistics Sector.",
-            "Conflict Check: Entity 'A.P. Møller' cleared for Project Green.",
-            "Market Alpha: M&A activity in Pharma up by 12.4% today."
-        ];
+      <div class="space-y-6">
+        <!-- Priority Action 1 -->
+        <div class="card rounded-2xl p-10 insight-card status-border status-critical">
+          <div class="flex items-start justify-between mb-8">
+            <div class="flex-1 pr-12">
+              <div class="flex items-center flex-wrap gap-2 mb-4">
+                <span class="badge badge-critical">
+                  <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                  Kritisk timing
+                </span>
+                <span class="text-xs text-stone-500">•</span>
+                <span class="text-xs font-medium text-stone-600">Window lukker: 48 timer</span>
+                <span class="source-tag">CVR API</span>
+                <span class="source-tag">LinkedIn Sales Nav</span>
+                <span class="source-tag">Regnskabsdata Q4 2025</span>
+                <span class="crm-badge">CRM-klar</span>
+              </div>
 
-        function triggerLiveAlert() {
-            const container = document.getElementById('toast-container');
-            const alertMsg = alerts[Math.floor(Math.random() * alerts.length)];
-            
-            const alertEl = document.createElement('div');
-            alertEl.className = "glass-panel p-6 rounded-[2rem] border-l-4 border-teal-400 flex items-center space-x-6 transform translate-x-full transition-all duration-700 pointer-events-auto opacity-0 shadow-2xl shadow-teal-400/10";
-            alertEl.innerHTML = `
-                <div class="w-3 h-3 bg-teal-400 rounded-full animate-ping"></div>
+              <h3 class="serif text-[2rem] text-stone-900 mb-4 tracking-tight">Nordic Blue Robotics ApS — Frasalg</h3>
+
+              <div class="prose prose-stone max-w-none mb-6">
+                <p class="text-stone-700 leading-relaxed">
+                  <strong>RAG Analysis Summary:</strong> Cross-referencing af 8 dokumenter (årsrapport, CVR-udtræk, LinkedIn C-suite movements, industri-benchmarks) viser klassisk pre-divestment pattern:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-stone-700 mt-3">
+                  <li><strong>Likviditetspres:</strong> Working capital dage faldet fra 34 til 18 (Q3→Q4). Industry average: 45 dage.</li>
+                  <li><strong>IP-værdi uudnyttet:</strong> 12 registrerede patenter (warehouse automation AI), estimeret værdi 8–14M DKK baseret på comparable transactions.</li>
+                  <li><strong>Management transition:</strong> CFO Andreas Møller skifter rolle d. 16/01 kl. 14:00 (relationship edge: høj).</li>
+                </ul>
+
+                <p class="text-teal-800 font-medium mt-4 bg-teal-50 p-4 rounded-lg border-l-4 border-teal-600">
+                  <strong>Next best action:</strong> Ring til Andreas i dag før kl. 16:00. AI har draftet call script baseret på jeres relation + current situation.
+                  <span class="block text-xs text-teal-700 mt-2">Partner-safe: Hvis du ikke ringer, fortsætter systemet i Monitoring og opdaterer signals + logger i CRM.</span>
+                </p>
+
+                <p class="text-stone-700 leading-relaxed mt-4">
+                  <strong>Competitive intelligence:</strong> Konkurrent-aktivitet spottet i LinkedIn-signal-trail. <strong>Jeres relationship edge = 73% win probability.</strong>
+                </p>
+              </div>
+
+              <div class="grid grid-cols-4 gap-5 p-6 bg-stone-50 rounded-xl mb-6">
                 <div>
-                    <p class="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] mb-1">Intelligence Signal</p>
-                    <p class="text-xs font-bold italic text-white/90 leading-tight">${alertMsg}</p>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Datakilder</p>
+                  <p class="text-sm font-medium text-stone-900">8 sources analyzed</p>
+                  <p class="text-xs text-stone-500 mt-1">Confidence: 94%</p>
                 </div>
-            `;
-            
-            container.appendChild(alertEl);
-            
-            setTimeout(() => {
-                alertEl.classList.remove('translate-x-full', 'opacity-0');
-            }, 100);
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Conflict Check</p>
+                  <p class="text-sm font-semibold text-emerald-600">✓ Auto-cleared</p>
+                  <p class="text-xs text-stone-500 mt-1">Checked: 13/01 09:15</p>
+                </div>
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Team Allocation</p>
+                  <p class="text-sm font-medium text-stone-900">Morten L. (Lead)</p>
+                  <p class="text-xs text-stone-500 mt-1">2 associates auto-assigned</p>
+                </div>
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">CRM Status</p>
+                  <p class="text-sm font-medium text-blue-600">Ready to sync</p>
+                  <p class="text-xs text-stone-500 mt-1">1-click activation</p>
+                </div>
+              </div>
 
-            setTimeout(() => {
-                alertEl.classList.add('opacity-0', 'translate-y-4');
-                setTimeout(() => alertEl.remove(), 1000);
-            }, 6000);
-        }
+              <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-6">
+                <div class="flex items-start space-x-4">
+                  <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-sm font-semibold text-blue-900 mb-2">CRM Auto-Integration ved godkendelse:</p>
+                    <ul class="text-xs text-blue-800 space-y-1.5">
+                      <li>✓ Lead oprettes i CRM med fuld case history + evidence trail</li>
+                      <li>✓ Andreas Møller tilføjes som primary contact (relationship score: 8/10)</li>
+                      <li>✓ Call task scheduleret til i dag kl. 15:00 (1 time buffer)</li>
+                      <li>✓ Pitch-deck vedhæftet (AI-generated, review-ready)</li>
+                      <li>✓ Follow-up sequence aktiveret (D+2, D+7, D+14 touchpoints)</li>
+                      <li>✓ Team notificeret via Slack + email</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        setInterval(() => {
-            if(Math.random() > 0.6) triggerLiveAlert();
-        }, 12000);
+            <div class="text-right flex-shrink-0">
+              <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">Estimeret deal-værdi</p>
+              <p class="value-primary text-[3.25rem] mb-3">4.7M</p>
+              <div class="space-y-3">
+                <div class="inline-flex items-center space-x-2 bg-emerald-50 px-4 py-2.5 rounded-lg border border-emerald-100">
+                  <div class="w-2 h-2 bg-emerald-600 rounded-full"></div>
+                  <p class="text-xs font-semibold text-emerald-800">Win prob: 73%</p>
+                </div>
+                <p class="text-xs text-stone-500 leading-relaxed">
+                  Baseret på:<br />
+                  • Similar cases (intern data)<br />
+                  • Relationship score: 8/10<br />
+                  • Sector expertise match
+                </p>
 
-        function simulateDataUpdates() {
-            const metrics = document.querySelectorAll('.text-5xl');
-            metrics.forEach(m => {
-                if(Math.random() > 0.8) {
-                    m.classList.add('text-teal-400');
-                    setTimeout(() => m.classList.remove('text-teal-400'), 2000);
-                }
-            });
-        }
-        setInterval(simulateDataUpdates, 5000);
+                <button class="btn btn-secondary w-full justify-center" onclick="openRagDrawer()">
+                  Vis forklaring (RAG)
+                </button>
+              </div>
+            </div>
+          </div>
 
-        window.onload = () => {
-            triggerLiveAlert();
-            showToast("Bech-Bruun Quantum Intelligence OS v3.0: Online.");
-        };
-    </script>
+          <div class="flex items-center flex-wrap gap-3 pt-6 border-t border-stone-200">
+            <button class="btn btn-primary" onclick="openCrmModal()">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Godkend & sync til CRM</span>
+              <span class="text-xs opacity-80">(1 klik)</span>
+            </button>
+
+            <button class="btn btn-secondary" onclick="openCrmModal()">CRM preview først</button>
+
+            <button class="btn btn-secondary" onclick="enableMonitoringOnly()">
+              Ingen handling • Monitoring (0 min)
+            </button>
+
+            <button class="btn btn-ghost text-stone-400" onclick="toast('Afvist • systemet logger beslutning i CRM');">
+              Afvis opportunity
+            </button>
+          </div>
+        </div>
+
+        <!-- Priority Action 2 -->
+        <div class="card rounded-2xl p-10 insight-card status-border status-opportunity">
+          <div class="flex items-start justify-between mb-8">
+            <div class="flex-1 pr-12">
+              <div class="flex items-center flex-wrap gap-2 mb-4">
+                <span class="badge badge-opportunity">
+                  <div class="w-1.5 h-1.5 bg-teal-700 rounded-full"></div>
+                  C-Suite Movement
+                </span>
+                <span class="text-xs text-stone-500">•</span>
+                <span class="text-xs font-medium text-stone-600">Relationship window: 21 dage</span>
+                <span class="source-tag">LinkedIn Premium</span>
+                <span class="source-tag">Market Signals</span>
+                <span class="source-tag">CRM notes</span>
+                <span class="crm-badge">Auto-log</span>
+              </div>
+
+              <h3 class="serif text-[2rem] text-stone-900 mb-4 tracking-tight">GreenTech Nordic — Ny CFO (inbound opportunity)</h3>
+
+              <div class="prose prose-stone max-w-none mb-6">
+                <p class="text-stone-700 leading-relaxed">
+                  <strong>RAG signal:</strong> Ny CFO + capex-aktivitet + ændring i procurement-pattern matcher “early legal spend” indikatorer.
+                  Systemet foreslår en <strong>lav-friktion intro</strong> (ingen pitch), hvor partneren kun skal vælge tone: “congrats + offer”.
+                </p>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 mt-4">
+                  <p class="text-sm font-semibold text-stone-900 mb-2">Partner-safe næste skridt (valgfrit)</p>
+                  <ul class="text-sm text-stone-700 space-y-2 list-disc pl-5">
+                    <li><strong>Option A:</strong> 2-linjers intro-mail (auto-draft) — du godkender kun.</li>
+                    <li><strong>Option B:</strong> Monitoring i 21 dage (auto-log + alerts) — 0 min.</li>
+                    <li><strong>Option C:</strong> Delegér til associate (systemet vedlægger evidence trail).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-5 p-6 bg-stone-50 rounded-xl mb-6">
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">RAG status</p>
+                  <p class="text-sm font-semibold text-emerald-700">GREEN</p>
+                  <p class="text-xs text-stone-500 mt-1">Coverage: 9/10</p>
+                </div>
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Relationship</p>
+                  <p class="text-sm font-medium text-stone-900">Warm intro mulig</p>
+                  <p class="text-xs text-stone-500 mt-1">2 mutual stakeholders</p>
+                </div>
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Effort</p>
+                  <p class="text-sm font-semibold text-emerald-700">2 min</p>
+                  <p class="text-xs text-stone-500 mt-1">Approval-only</p>
+                </div>
+                <div>
+                  <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">CRM</p>
+                  <p class="text-sm font-medium text-blue-600">Auto-log ON</p>
+                  <p class="text-xs text-stone-500 mt-1">No manual entry</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <button class="btn btn-primary" onclick="openCrmModal()">
+                  Godkend intro & log i CRM
+                  <span class="text-xs opacity-80">(1 klik)</span>
+                </button>
+                <button class="btn btn-secondary" onclick="enableMonitoringOnly()">Monitoring (0 min)</button>
+                <button class="btn btn-ghost" onclick="toast('Delegated • systemet oprettede tasks i CRM');">Delegér</button>
+              </div>
+            </div>
+
+            <div class="text-right flex-shrink-0">
+              <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">Estimeret fee potentiale</p>
+              <p class="value-primary text-[3.25rem] mb-3">1.2M</p>
+              <div class="space-y-3">
+                <div class="inline-flex items-center space-x-2 bg-emerald-50 px-4 py-2.5 rounded-lg border border-emerald-100">
+                  <div class="w-2 h-2 bg-emerald-600 rounded-full"></div>
+                  <p class="text-xs font-semibold text-emerald-800">Win prob: 61%</p>
+                </div>
+                <p class="text-xs text-stone-500 leading-relaxed">
+                  Model forklarer win-prob med weights:<br />
+                  • Timing 35%<br />
+                  • Relationship 40%<br />
+                  • Need 25%
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Priority Action 3 -->
+        <div class="card rounded-2xl p-10 insight-card status-border status-high">
+          <div class="flex items-start justify-between mb-6">
+            <div class="flex-1 pr-12">
+              <div class="flex items-center flex-wrap gap-2 mb-4">
+                <span class="badge badge-high">
+                  <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                  RAG kræver 2 manglende kilder
+                </span>
+                <span class="text-xs text-stone-500">•</span>
+                <span class="text-xs font-medium text-stone-600">Auto-fix muligt (ingen partner effort)</span>
+                <span class="source-tag">Doc Finder</span>
+                <span class="source-tag">OCR/Parse</span>
+                <span class="crm-badge">Monitoring</span>
+              </div>
+
+              <h3 class="serif text-[2rem] text-stone-900 mb-4 tracking-tight">Ambersignal — “Manglende dokumentation” (systemet lukker gap)</h3>
+
+              <p class="text-stone-700 leading-relaxed">
+                Her vises tydeligt hvorfor et lead er <strong>AMBER</strong>: ikke fordi kvaliteten er dårlig, men fordi to “essentials” mangler.
+                Systemet kan selv indhente, parse og opdatere RAG — partneren kan blot vælge om de vil have en alert ved GREEN.
+              </p>
+
+              <div class="mt-5 bg-stone-50 border border-stone-200 rounded-xl p-5">
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86l-7.09 12.27A2 2 0 004.93 19h14.14a2 2 0 001.73-2.87L13.71 3.86a2 2 0 00-3.42 0z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-semibold text-stone-900">Missing essentials</p>
+                    <ul class="text-sm text-stone-700 mt-2 space-y-1.5 list-disc pl-5">
+                      <li>Seneste budget/forecast (for at bekræfte capex/hiring runway)</li>
+                      <li>Ejerstrategi / investor note (for at bekræfte divestment intent)</li>
+                    </ul>
+                    <p class="text-xs text-stone-500 mt-3">Når de er fundet, opgraderes RAG til GREEN og CRM-opportunity opdateres automatisk.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 mt-6">
+                <button class="btn btn-secondary" onclick="toast('Auto-fix startet • systemet søger missing docs');">Start auto-fix (0 min)</button>
+                <button class="btn btn-primary" onclick="toast('Alert sat • du får ping når RAG er GREEN');">Alert når GREEN</button>
+                <button class="btn btn-ghost" onclick="openRagDrawer()">Se source trail</button>
+              </div>
+            </div>
+
+            <div class="text-right flex-shrink-0">
+              <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">RAG Confidence</p>
+              <p class="value-secondary text-amber-700 mb-2">88%</p>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 88%"></div>
+              </div>
+              <p class="text-xs text-stone-500 mt-3">Forventet GREEN: 24–72 timer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Footer -->
+    <footer class="pb-10">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="serif text-2xl text-stone-900">Final solution (interview-ready)</h3>
+          <p class="text-stone-600 mt-2 max-w-3xl leading-relaxed">
+            Fokus: <strong>Lead generation</strong> + <strong>RAG status</strong> + <strong>CRM integration</strong> — med partner-safe UX.
+            Partneren føler aldrig pres: de kan altid vælge <strong>Monitoring (0 min)</strong>, mens systemet fortsætter med at indsamle evidens og logge i CRM.
+          </p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-stone-500">Build: demo UI</p>
+          <p class="text-sm font-semibold text-stone-900">Auto-log • Audit • Idempotent sync</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ====================== RAG Drawer ====================== -->
+  <div id="ragDrawer" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/30" onclick="closeRagDrawer()"></div>
+    <div class="absolute right-0 top-0 h-full w-[540px] bg-white shadow-2xl border-l border-stone-200 p-8 overflow-y-auto">
+      <div class="flex items-start justify-between">
+        <div>
+          <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">RAG Source Trail</p>
+          <h3 class="serif text-2xl text-stone-900 mt-2">Hvorfor denne anbefaling?</h3>
+          <p class="text-sm text-stone-600 mt-2">Auditérbar forklaring: evidence density, freshness, gaps og citations.</p>
+        </div>
+        <button class="btn btn-ghost" onclick="closeRagDrawer()">Luk</button>
+      </div>
+
+      <div class="mt-6 space-y-4">
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-semibold text-stone-900">Signal summary</p>
+            <span class="badge badge-automated">Auto-audited</span>
+          </div>
+          <ul class="mt-3 text-sm text-stone-700 space-y-2 list-disc pl-5">
+            <li><strong>Evidence density:</strong> 8 dokumenter, 22 datapunkter, 4 uafhængige kildetyper</li>
+            <li><strong>Freshness:</strong> 2 datapunkter opdateret i dag</li>
+            <li><strong>Gaps:</strong> Mangler: budget/forecast + ejerstrategi (AMBER hvis ikke fundet inden 72t)</li>
+          </ul>
+        </div>
+
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-semibold text-stone-900">What changed since yesterday</p>
+            <span class="source-tag">Diff</span>
+          </div>
+          <div class="mt-3 space-y-3 text-sm">
+            <div class="bg-stone-50 border border-stone-200 rounded-lg p-4">
+              <p class="font-semibold text-stone-900">+ New signal</p>
+              <p class="text-stone-600 mt-1">CFO role transition bekræftet (timestamp + reference)</p>
+            </div>
+            <div class="bg-stone-50 border border-stone-200 rounded-lg p-4">
+              <p class="font-semibold text-stone-900">~ Updated</p>
+              <p class="text-stone-600 mt-1">Working capital trend: ny kvartalsnote parsed</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded-xl p-5">
+          <p class="text-sm font-semibold text-stone-900 mb-3">Citations (klikbare internt)</p>
+          <div class="space-y-3 text-sm">
+            <div class="intelligence-item rounded-lg border border-stone-200">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold text-stone-900">CVR udtræk</p>
+                <span class="source-tag">Fresh: 1d</span>
+              </div>
+              <p class="text-stone-600 mt-1">Org. ændringer + ejerstruktur + nøglepersoner</p>
+            </div>
+
+            <div class="intelligence-item rounded-lg border border-stone-200">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold text-stone-900">Årsrapport</p>
+                <span class="source-tag">Fresh: 14d</span>
+              </div>
+              <p class="text-stone-600 mt-1">Likviditet, working capital, note disclosures</p>
+            </div>
+
+            <div class="intelligence-item rounded-lg border border-stone-200">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold text-stone-900">Internal CRM notes</p>
+                <span class="source-tag">Fresh: 3d</span>
+              </div>
+              <p class="text-stone-600 mt-1">Tidligere relation + sidste mandat + stakeholders</p>
+            </div>
+
+            <div class="intelligence-item rounded-lg border border-stone-200">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold text-stone-900">News / Market signals</p>
+                <span class="source-tag">Fresh: 2d</span>
+              </div>
+              <p class="text-stone-600 mt-1">Sector consolidation + comparable transactions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================== CRM Preview Modal ====================== -->
+  <div id="crmModal" class="fixed inset-0 z-[70] hidden">
+    <div class="absolute inset-0 bg-black/30" onclick="closeCrmModal()"></div>
+
+    <div class="absolute left-1/2 top-1/2 w-[900px] -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-2xl border border-stone-200 overflow-hidden">
+      <div class="p-7 border-b border-stone-200 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">CRM preview</p>
+          <h3 class="serif text-2xl text-stone-900 mt-1">Det her bliver oprettet — uden manuelt arbejde</h3>
+        </div>
+        <button class="btn btn-ghost" onclick="closeCrmModal()">Luk</button>
+      </div>
+
+      <div class="p-7 grid grid-cols-2 gap-6">
+        <div class="card rounded-xl p-6">
+          <p class="text-sm font-semibold text-stone-900 mb-4">Objects</p>
+          <ul class="text-sm text-stone-700 space-y-2">
+            <li>✓ Account: <strong id="crmAccountName">Nordic Blue Robotics ApS</strong></li>
+            <li>✓ Contact: <strong id="crmContactName">Andreas Møller</strong> (Primary)</li>
+            <li>✓ Opportunity: <strong>M&A / Divestment</strong> (Stage: “Identified”)</li>
+            <li>✓ Activities: call task + follow-up sequence</li>
+          </ul>
+        </div>
+
+        <div class="card rounded-xl p-6">
+          <p class="text-sm font-semibold text-stone-900 mb-4">Audit & safety</p>
+          <ul class="text-sm text-stone-700 space-y-2">
+            <li>✓ Conflict check logges (timestamp + result)</li>
+            <li>✓ Idempotency: ingen duplicates ved gentagne klik</li>
+            <li>✓ Evidence trail gemmes på opportunity</li>
+            <li>✓ Partner effort: <strong>0 min</strong> (auto-log ON)</li>
+          </ul>
+        </div>
+
+        <div class="col-span-2 card rounded-xl p-6">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-semibold text-stone-900">Field mapping (eksempel)</p>
+            <span class="crm-badge">Internal CRM</span>
+          </div>
+
+          <div class="mt-4 grid grid-cols-3 gap-4 text-sm">
+            <div class="bg-stone-50 border border-stone-200 rounded-lg p-4">
+              <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">RAG</p>
+              <p class="mt-2 text-stone-800">Confidence: <span id="crmRagConfidence">94%</span></p>
+              <p class="text-stone-600">Status: <span id="crmRagStatus">GREEN</span></p>
+            </div>
+
+            <div class="bg-stone-50 border border-stone-200 rounded-lg p-4">
+              <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Lead</p>
+              <p class="mt-2 text-stone-800">Win prob: 73%</p>
+              <p class="text-stone-600">Deal value: 4.7M</p>
+            </div>
+
+            <div class="bg-stone-50 border border-stone-200 rounded-lg p-4">
+              <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Next best action</p>
+              <p class="mt-2 text-stone-800">Call before 16:00</p>
+              <p class="text-stone-600">Sequence: D+2/D+7/D+14</p>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-5">
+            <p class="text-sm font-semibold text-blue-900 mb-2">Zero-effort promise</p>
+            <p class="text-sm text-blue-800">
+              Når du sync’er, oprettes og logges alt automatisk i CRM. Hvis du vælger <strong>Monitoring</strong>, oprettes lead som “Monitoring”
+              (ikke pipeline-forurening), men evidence trail + signals opdateres løbende.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-7 border-t border-stone-200 flex items-center justify-between">
+        <div class="text-sm text-stone-600">
+          Tip: Brug “Monitoring (0 min)” i mødet for at vise “ingen pres, kun upside”.
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="btn btn-secondary" onclick="enableMonitoringOnly()">Sæt til Monitoring (ingen handling)</button>
+          <button class="btn btn-primary" onclick="syncToCrm()">
+            Godkend & sync til CRM <span class="text-xs opacity-80">(1 klik)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================== JS ====================== -->
+  <script>
+    // Demo partner state (kan erstattes af API-kald)
+    const partners = {
+      camilla: { upside: "+2.4M", timeSaved: "11.3h sparet", rag: { status: "GREEN", confidence: 94, freshness: "0–2 dage", coverage: "8/10 essentials" } },
+      morten:  { upside: "+4.1M", timeSaved: "8.6h sparet",  rag: { status: "AMBER", confidence: 88, freshness: "2–7 dage", coverage: "7/10 essentials" } },
+      sara:    { upside: "+1.7M", timeSaved: "6.1h sparet",  rag: { status: "GREEN", confidence: 92, freshness: "0–2 dage", coverage: "9/10 essentials" } }
+    };
+
+    let monitoringOn = true;
+
+    function setRagUI(rag) {
+      const pill = document.getElementById("ragStatusPill");
+      const conf = document.getElementById("ragConfidence");
+      const bar = document.getElementById("ragConfidenceBar");
+      const fresh = document.getElementById("ragFreshness");
+      const cov = document.getElementById("ragCoverage");
+
+      conf.textContent = rag.confidence + "%";
+      bar.style.width = rag.confidence + "%";
+      fresh.textContent = "Freshness: " + rag.freshness;
+      cov.textContent = "Coverage: " + rag.coverage;
+
+      if (rag.status === "GREEN") {
+        pill.className = "badge badge-opportunity";
+        pill.innerHTML = '<div class="w-1.5 h-1.5 bg-teal-700 rounded-full"></div> RAG: GREEN';
+      } else if (rag.status === "AMBER") {
+        pill.className = "badge badge-high";
+        pill.innerHTML = '<div class="w-1.5 h-1.5 bg-white rounded-full"></div> RAG: AMBER';
+      } else {
+        pill.className = "badge badge-critical";
+        pill.innerHTML = '<div class="w-1.5 h-1.5 bg-white rounded-full"></div> RAG: RED';
+      }
+    }
+
+    // Partner switching
+    const partnerSelect = document.getElementById("partnerSelect");
+    if (partnerSelect) {
+      partnerSelect.addEventListener("change", (e) => {
+        const p = partners[e.target.value];
+        document.getElementById("partnerUpside").textContent = p.upside;
+        document.getElementById("partnerTimeSaved").textContent = "• " + p.timeSaved;
+        setRagUI(p.rag);
+
+        // keep CRM preview aligned
+        document.getElementById("crmRagConfidence").textContent = p.rag.confidence + "%";
+        document.getElementById("crmRagStatus").textContent = p.rag.status;
+      });
+
+      // init
+      const initP = partners[partnerSelect.value];
+      document.getElementById("partnerUpside").textContent = initP.upside;
+      document.getElementById("partnerTimeSaved").textContent = "• " + initP.timeSaved;
+      setRagUI(initP.rag);
+
+      document.getElementById("crmRagConfidence").textContent = initP.rag.confidence + "%";
+      document.getElementById("crmRagStatus").textContent = initP.rag.status;
+    }
+
+    // RAG drawer
+    function openRagDrawer() { document.getElementById("ragDrawer").classList.remove("hidden"); }
+    function closeRagDrawer() { document.getElementById("ragDrawer").classList.add("hidden"); }
+
+    // Monitoring toggle
+    function toggleMonitoring() {
+      monitoringOn = !monitoringOn;
+      document.getElementById("monitoringState").textContent = monitoringOn ? "ON" : "OFF";
+      toast("Monitoring: " + (monitoringOn ? "ON" : "OFF") + " • Auto-log " + (monitoringOn ? "aktiv" : "pauset"));
+    }
+
+    function enableMonitoringOnly() {
+      monitoringOn = true;
+      document.getElementById("monitoringState").textContent = "ON";
+      closeCrmModal();
+      toast("Monitoring valgt • 0 min • systemet fortsætter og logger i CRM");
+    }
+
+    // CRM modal
+    function openCrmModal() {
+      // sync CRM preview with current RAG UI
+      const currentStatus = (document.getElementById("ragStatusPill")?.textContent || "GREEN").replace("RAG:", "").trim();
+      const currentConf = document.getElementById("ragConfidence")?.textContent || "94%";
+      document.getElementById("crmRagStatus").textContent = currentStatus;
+      document.getElementById("crmRagConfidence").textContent = currentConf;
+
+      document.getElementById("crmModal").classList.remove("hidden");
+    }
+
+    function closeCrmModal() { document.getElementById("crmModal").classList.add("hidden"); }
+
+    // CRM Sync (demo)
+    async function syncToCrm() {
+      const payload = {
+        idempotency_key: cryptoRandomKey(),
+        partner_view: partnerSelect ? partnerSelect.value : "camilla",
+        mode: monitoringOn ? "active" : "manual",
+        account: { name: document.getElementById("crmAccountName")?.textContent || "Nordic Blue Robotics ApS" },
+        contact: { name: document.getElementById("crmContactName")?.textContent || "Andreas Møller", role: "CFO" },
+        opportunity: { type: "M&A / Divestment", stage: "Identified", deal_value_dkk: 4700000, win_prob: 0.73 },
+        rag: {
+          status: document.getElementById("crmRagStatus")?.textContent || "GREEN",
+          confidence: document.getElementById("crmRagConfidence")?.textContent || "94%"
+        },
+        actions: [
+          { type: "task", title: "Call Andreas Møller", due: "today 15:00", auto_log: true },
+          { type: "sequence", name: "D+2/D+7/D+14", auto_log: true }
+        ],
+        audit: { conflict_check: "auto-cleared", evidence_trail: true, no_manual_entry: true }
+      };
+
+      // Replace with your backend endpoint:
+      // await fetch("/api/crm/sync", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+
+      console.log("CRM SYNC PAYLOAD:", payload);
+
+      closeCrmModal();
+      toast("Synced til CRM • Auto-log ON • 0 manuel indsats");
+    }
+
+    function cryptoRandomKey() {
+      return "sync_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+    }
+
+    function toast(message) {
+      const el = document.createElement("div");
+      el.className = "fixed bottom-6 right-6 z-[80] bg-white border border-stone-200 shadow-xl rounded-xl px-5 py-3 text-sm text-stone-800";
+      el.innerHTML = `<div class="flex items-center gap-2"><span class="crm-badge">CRM</span><span>${message}</span></div>`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3200);
+    }
+  </script>
 </body>
 </html>
-
