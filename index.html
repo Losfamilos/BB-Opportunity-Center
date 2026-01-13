@@ -18,6 +18,7 @@
       color: #1c1917;
       -webkit-font-smoothing: antialiased;
       letter-spacing: -0.011em;
+      overflow-x: hidden; /* mobile overflow guard */
     }
 
     .serif {
@@ -261,38 +262,53 @@
       gap: 0.5rem;
       white-space: nowrap;
     }
+
+    /* ===================== MOBILE / RESPONSIVE PATCH ===================== */
+    @media (max-width: 1024px) {
+      .value-primary { font-size: 2.6rem; }
+      .value-secondary { font-size: 2.1rem; }
+    }
+    @media (max-width: 640px) {
+      .value-primary { font-size: 2.2rem; }
+      .value-secondary { font-size: 1.8rem; }
+      .btn { padding: 0.72rem 1.05rem; font-size: 0.9rem; }
+      .btn-ghost { padding: 0.55rem 0.9rem; }
+      .badge, .source-tag, .crm-badge, .pill-safe, .zero-effort { white-space: normal; }
+    }
   </style>
 </head>
 
 <body>
   <!-- Header -->
   <header class="bg-white border-b border-stone-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
-    <div class="max-w-[1800px] mx-auto px-16 py-7 flex items-center justify-between">
-      <div class="flex items-center space-x-4">
+    <!-- responsive padding + wrap -->
+    <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 py-5 lg:py-7 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div class="flex items-center justify-between">
         <div>
-          <h1 class="serif text-[2rem] text-stone-900 tracking-tight">Bech-Bruun</h1>
+          <h1 class="serif text-[1.75rem] sm:text-[2rem] text-stone-900 tracking-tight">Bech-Bruun</h1>
           <p class="text-[0.6875rem] font-medium text-stone-500 tracking-wider uppercase mt-0.5">Executive Intelligence Platform</p>
         </div>
       </div>
 
-      <div class="flex items-center space-x-6">
+      <!-- Right cluster becomes wrap + grid feel -->
+      <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6 w-full lg:w-auto">
 
         <!-- Page Switcher -->
-        <div class="flex items-center space-x-2 bg-stone-50 border border-stone-200 rounded-xl p-1">
-          <button id="navOpportunity" class="btn btn-ghost !px-4 !py-2 !text-sm font-semibold rounded-lg" onclick="showPage('opportunity')">
+        <div class="flex items-center space-x-2 bg-stone-50 border border-stone-200 rounded-xl p-1 w-full lg:w-auto">
+          <button id="navOpportunity" class="btn btn-ghost !px-4 !py-2 !text-sm font-semibold rounded-lg flex-1 lg:flex-none" onclick="showPage('opportunity')">
             Opportunity Center
           </button>
-          <button id="navCommercial" class="btn btn-ghost !px-4 !py-2 !text-sm font-semibold rounded-lg" onclick="showPage('commercial')">
+          <button id="navCommercial" class="btn btn-ghost !px-4 !py-2 !text-sm font-semibold rounded-lg flex-1 lg:flex-none" onclick="showPage('commercial')">
             Commercial Excellence
           </button>
         </div>
 
         <!-- Partner Switcher + Upside Snapshot -->
-        <div class="flex items-center space-x-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full lg:w-auto">
           <div class="px-4 py-2 bg-stone-50 rounded-lg border border-stone-200">
             <p class="text-[0.65rem] font-semibold text-stone-500 uppercase tracking-wider">Partner view</p>
             <div class="flex items-center space-x-2 mt-1">
-              <select id="partnerSelect" class="text-sm font-semibold text-stone-900 bg-transparent outline-none">
+              <select id="partnerSelect" class="text-sm font-semibold text-stone-900 bg-transparent outline-none w-full">
                 <option value="camilla" selected>Camilla Huus</option>
                 <option value="morten">Morten L.</option>
                 <option value="sara">Sara K.</option>
@@ -311,45 +327,49 @@
         </div>
 
         <!-- CRM badge -->
-        <div class="flex items-center space-x-3 px-4 py-2 bg-blue-50 rounded-lg border border-blue-100">
-          <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-          <span class="crm-badge">Live CRM Integration</span>
+        <div class="flex items-center justify-between gap-3 px-4 py-2 bg-blue-50 rounded-lg border border-blue-100 w-full lg:w-auto">
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+            <span class="crm-badge">Live CRM Integration</span>
+          </div>
           <span class="text-xs text-blue-700 font-medium">Synced 2 min ago</span>
         </div>
 
-        <!-- Date -->
-        <div class="text-right">
-          <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider">Tirsdag</p>
-          <p class="text-sm font-medium text-stone-700">13. Januar 2026 • 09:42</p>
+        <!-- Date + User row -->
+        <div class="flex items-center justify-between gap-3 w-full lg:w-auto">
+          <div class="text-left lg:text-right">
+            <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider">Tirsdag</p>
+            <p class="text-sm font-medium text-stone-700">13. Januar 2026 • 09:42</p>
+          </div>
+
+          <div class="hidden lg:block h-10 w-px bg-stone-200"></div>
+
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-sm font-semibold text-stone-900">Camilla Huus</p>
+              <p class="text-xs text-stone-500">Chief Operating Officer</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-800 to-teal-900 flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white">
+              CH
+            </div>
+          </div>
         </div>
 
-        <div class="h-10 w-px bg-stone-200"></div>
-
-        <!-- User -->
-        <div class="flex items-center space-x-4">
-          <div>
-            <p class="text-sm font-semibold text-stone-900 text-right">Camilla Huus</p>
-            <p class="text-xs text-stone-500 text-right">Chief Operating Officer</p>
-          </div>
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-800 to-teal-900 flex items-center justify-center text-white font-semibold shadow-lg ring-2 ring-white">
-            CH
-          </div>
-        </div>
       </div>
     </div>
   </header>
 
   <!-- Main -->
-  <main class="max-w-[1800px] mx-auto px-16 py-14">
+  <main class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 py-8 lg:py-14">
 
     <!-- ====================== PAGE: OPPORTUNITY CENTER ====================== -->
     <div id="pageOpportunity" class="block">
 
       <!-- Value Proposition Banner -->
-      <div class="value-highlight rounded-2xl p-8 mb-10 animate-in">
-        <div class="flex items-start justify-between">
+      <div class="value-highlight rounded-2xl p-6 sm:p-8 mb-8 sm:mb-10 animate-in">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div class="flex-1">
-            <div class="flex items-center space-x-3 mb-3">
+            <div class="flex items-start sm:items-center flex-wrap gap-3 mb-3">
               <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
@@ -367,7 +387,7 @@
               CRM-integration sikrer at alle aktiviteter trackes uden manuel input.
             </p>
           </div>
-          <div class="text-right flex-shrink-0 ml-8">
+          <div class="text-left lg:text-right flex-shrink-0">
             <p class="text-sm font-semibold text-emerald-700 mb-1">Partner time saved today</p>
             <p class="text-5xl font-light text-emerald-600">6.2h</p>
             <p class="text-xs text-stone-600 mt-2">= 93k DKK i opportunity cost</p>
@@ -376,8 +396,8 @@
       </div>
 
       <!-- RAG Trust Bar -->
-      <div class="card rounded-2xl p-6 mb-10 animate-in delay-100">
-        <div class="flex items-start justify-between gap-8">
+      <div class="card rounded-2xl p-6 mb-8 sm:mb-10 animate-in delay-100">
+        <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-6">
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2 mb-2">
               <span class="badge badge-opportunity" id="ragStatusPill">
@@ -406,7 +426,7 @@
             </div>
           </div>
 
-          <div class="text-right min-w-[320px]">
+          <div class="text-left xl:text-right xl:min-w-[320px]">
             <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">RAG Confidence</p>
             <p class="value-secondary text-stone-900 mb-2" id="ragConfidence">94%</p>
 
@@ -414,7 +434,7 @@
               <div class="progress-fill" id="ragConfidenceBar" style="width: 94%"></div>
             </div>
 
-            <div class="flex items-center justify-end gap-2 mt-4">
+            <div class="flex items-center xl:justify-end gap-2 mt-4 flex-wrap">
               <button class="btn btn-secondary" onclick="openRagDrawer()">Vis source trail</button>
               <button class="btn btn-ghost" onclick="toggleMonitoring()">Monitoring: <span id="monitoringState" class="font-semibold">ON</span></button>
             </div>
@@ -422,10 +442,10 @@
         </div>
       </div>
 
-      <!-- Executive Summary Bar -->
-      <div class="grid grid-cols-5 gap-6 mb-14 animate-in delay-100">
+      <!-- Executive Summary Bar (responsive) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-6 mb-10 sm:mb-14 animate-in delay-100">
         <div class="card rounded-xl p-7 status-border status-opportunity">
-          <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center justify-between mb-2 gap-2">
             <p class="text-[0.6875rem] font-semibold text-stone-500 uppercase tracking-wider">Revenue klar til aktivering</p>
             <span class="zero-effort text-[0.625rem] font-bold text-emerald-700">
               <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -469,11 +489,11 @@
       </div>
 
       <!-- Priority Actions -->
-      <section class="mb-20 animate-in delay-200">
-        <div class="flex items-center justify-between mb-8">
+      <section class="mb-16 sm:mb-20 animate-in delay-200">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
           <div class="flex items-center flex-wrap gap-3">
             <div class="pulse-indicator"></div>
-            <h2 class="serif text-[2.75rem] text-stone-900 tracking-tight">Kræver din godkendelse</h2>
+            <h2 class="serif text-[2rem] sm:text-[2.75rem] text-stone-900 tracking-tight">Kræver din godkendelse</h2>
             <span class="zero-effort">
               <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"></path>
@@ -494,9 +514,9 @@
 
         <div class="space-y-6">
           <!-- Priority Action 1 -->
-          <div class="card rounded-2xl p-10 insight-card status-border status-critical">
-            <div class="flex items-start justify-between mb-8">
-              <div class="flex-1 pr-12">
+          <div class="card rounded-2xl p-6 sm:p-10 insight-card status-border status-critical">
+            <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 mb-8">
+              <div class="flex-1 xl:pr-12">
                 <div class="flex items-center flex-wrap gap-2 mb-4">
                   <span class="badge badge-critical">
                     <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
@@ -510,7 +530,7 @@
                   <span class="crm-badge">CRM-klar</span>
                 </div>
 
-                <h3 class="serif text-[2rem] text-stone-900 mb-4 tracking-tight">Nordic Blue Robotics ApS — Frasalg</h3>
+                <h3 class="serif text-[1.6rem] sm:text-[2rem] text-stone-900 mb-4 tracking-tight">Nordic Blue Robotics ApS — Frasalg</h3>
 
                 <div class="prose prose-stone max-w-none mb-6">
                   <p class="text-stone-700 leading-relaxed">
@@ -532,7 +552,7 @@
                   </p>
                 </div>
 
-                <div class="grid grid-cols-4 gap-5 p-6 bg-stone-50 rounded-xl mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 p-6 bg-stone-50 rounded-xl mb-6">
                   <div>
                     <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">Datakilder</p>
                     <p class="text-sm font-medium text-stone-900">8 sources analyzed</p>
@@ -575,7 +595,7 @@
                 </div>
               </div>
 
-              <div class="text-right flex-shrink-0">
+              <div class="text-left xl:text-right flex-shrink-0">
                 <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">Estimeret deal-værdi</p>
                 <p class="value-primary text-[3.25rem] mb-3">4.7M</p>
                 <div class="space-y-3">
@@ -619,9 +639,9 @@
           </div>
 
           <!-- Priority Action 2 -->
-          <div class="card rounded-2xl p-10 insight-card status-border status-opportunity">
-            <div class="flex items-start justify-between mb-8">
-              <div class="flex-1 pr-12">
+          <div class="card rounded-2xl p-6 sm:p-10 insight-card status-border status-opportunity">
+            <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 mb-8">
+              <div class="flex-1 xl:pr-12">
                 <div class="flex items-center flex-wrap gap-2 mb-4">
                   <span class="badge badge-opportunity">
                     <div class="w-1.5 h-1.5 bg-teal-700 rounded-full"></div>
@@ -635,7 +655,7 @@
                   <span class="crm-badge">Auto-log</span>
                 </div>
 
-                <h3 class="serif text-[2rem] text-stone-900 mb-4 tracking-tight">GreenTech Nordic — Ny CFO (inbound opportunity)</h3>
+                <h3 class="serif text-[1.6rem] sm:text-[2rem] text-stone-900 mb-4 tracking-tight">GreenTech Nordic — Ny CFO (inbound opportunity)</h3>
 
                 <div class="prose prose-stone max-w-none mb-6">
                   <p class="text-stone-700 leading-relaxed">
@@ -653,7 +673,7 @@
                   </div>
                 </div>
 
-                <div class="grid grid-cols-4 gap-5 p-6 bg-stone-50 rounded-xl mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 p-6 bg-stone-50 rounded-xl mb-6">
                   <div>
                     <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-1.5">RAG status</p>
                     <p class="text-sm font-semibold text-emerald-700">GREEN</p>
@@ -676,7 +696,7 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 flex-wrap">
                   <button class="btn btn-primary" onclick="openCrmModal()">
                     Godkend intro & log i CRM
                     <span class="text-xs opacity-80">(1 klik)</span>
@@ -686,7 +706,7 @@
                 </div>
               </div>
 
-              <div class="text-right flex-shrink-0">
+              <div class="text-left xl:text-right flex-shrink-0">
                 <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">Estimeret fee potentiale</p>
                 <p class="value-primary text-[3.25rem] mb-3">1.2M</p>
                 <div class="space-y-3">
@@ -706,9 +726,9 @@
           </div>
 
           <!-- Priority Action 3 -->
-          <div class="card rounded-2xl p-10 insight-card status-border status-high">
-            <div class="flex items-start justify-between mb-6">
-              <div class="flex-1 pr-12">
+          <div class="card rounded-2xl p-6 sm:p-10 insight-card status-border status-high">
+            <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 mb-6">
+              <div class="flex-1 xl:pr-12">
                 <div class="flex items-center flex-wrap gap-2 mb-4">
                   <span class="badge badge-high">
                     <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
@@ -721,7 +741,7 @@
                   <span class="crm-badge">Monitoring</span>
                 </div>
 
-                <h3 class="serif text-[2rem] text-stone-900 mb-4 tracking-tight">Ambersignal — “Manglende dokumentation” (systemet lukker gap)</h3>
+                <h3 class="serif text-[1.6rem] sm:text-[2rem] text-stone-900 mb-4 tracking-tight">Ambersignal — “Manglende dokumentation” (systemet lukker gap)</h3>
 
                 <p class="text-stone-700 leading-relaxed">
                   Her vises tydeligt hvorfor et lead er <strong>AMBER</strong>: ikke fordi kvaliteten er dårlig, men fordi to “essentials” mangler.
@@ -746,14 +766,14 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-3 mt-6">
+                <div class="flex items-center gap-3 mt-6 flex-wrap">
                   <button class="btn btn-secondary" onclick="toast('Auto-fix startet • systemet søger missing docs');">Start auto-fix (0 min)</button>
                   <button class="btn btn-primary" onclick="toast('Alert sat • du får ping når RAG er GREEN');">Alert når GREEN</button>
                   <button class="btn btn-ghost" onclick="openRagDrawer()">Se source trail</button>
                 </div>
               </div>
 
-              <div class="text-right flex-shrink-0">
+              <div class="text-left xl:text-right flex-shrink-0">
                 <p class="text-[0.6875rem] font-semibold text-stone-400 uppercase tracking-wider mb-2">RAG Confidence</p>
                 <p class="value-secondary text-amber-700 mb-2">88%</p>
                 <div class="progress-bar">
@@ -769,7 +789,7 @@
       <div class="section-divider"></div>
 
       <footer class="pb-10">
-        <div class="flex items-start justify-between">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
           <div>
             <h3 class="serif text-2xl text-stone-900">Final solution (interview-ready)</h3>
             <p class="text-stone-600 mt-2 max-w-3xl leading-relaxed">
@@ -777,7 +797,7 @@
               Partneren føler aldrig pres: de kan altid vælge <strong>Monitoring (0 min)</strong>, mens systemet fortsætter med at indsamle evidens og logge i CRM.
             </p>
           </div>
-          <div class="text-right">
+          <div class="text-left lg:text-right">
             <p class="text-xs text-stone-500">Build: demo UI</p>
             <p class="text-sm font-semibold text-stone-900">Auto-log • Audit • Idempotent sync</p>
           </div>
@@ -792,10 +812,10 @@
     <div id="pageCommercial" class="hidden">
 
       <!-- Top banner -->
-      <div class="value-highlight rounded-2xl p-8 mb-10 animate-in">
-        <div class="flex items-start justify-between">
+      <div class="value-highlight rounded-2xl p-6 sm:p-8 mb-8 sm:mb-10 animate-in">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div class="flex-1">
-            <div class="flex items-center space-x-3 mb-3">
+            <div class="flex items-start sm:items-center flex-wrap gap-3 mb-3">
               <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
@@ -812,7 +832,7 @@
               <strong>pipeline/account performance</strong>, <strong>governance</strong> og <strong>benefits realization</strong> — alt koblet til CRM og målbart på ledelsesniveau.
             </p>
           </div>
-          <div class="text-right flex-shrink-0 ml-8">
+          <div class="text-left lg:text-right flex-shrink-0">
             <p class="text-sm font-semibold text-emerald-700 mb-1">Måleligt uplift (QTD)</p>
             <p class="text-5xl font-light text-emerald-600">+18%</p>
             <p class="text-xs text-stone-600 mt-2">pipeline velocity • win-rate • focus clients</p>
@@ -820,8 +840,8 @@
         </div>
       </div>
 
-      <!-- Executive Scoreboard -->
-      <div class="grid grid-cols-5 gap-6 mb-14 animate-in delay-100">
+      <!-- Executive Scoreboard (responsive) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-6 mb-10 sm:mb-14 animate-in delay-100">
         <div class="card rounded-xl p-7 status-border status-opportunity">
           <p class="text-[0.6875rem] font-semibold text-stone-500 uppercase tracking-wider mb-3">Focus clients coverage</p>
           <p class="value-secondary text-emerald-700 mb-2">82%</p>
@@ -858,24 +878,22 @@
         </div>
       </div>
 
-      <!-- Portfolio + Governance -->
-      <div class="grid grid-cols-12 gap-6 mb-14 animate-in delay-200">
-        <!-- Initiative Portfolio -->
-        <div class="col-span-7 card rounded-2xl p-8">
-          <div class="flex items-start justify-between mb-6">
+      <!-- Portfolio + Governance (responsive col-span) -->
+      <div class="grid grid-cols-12 gap-6 mb-10 sm:mb-14 animate-in delay-200">
+        <div class="col-span-12 xl:col-span-7 card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
             <div>
               <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Porteføljestyring</p>
               <h3 class="serif text-2xl text-stone-900 mt-2">Commercial Initiatives Portfolio</h3>
               <p class="text-sm text-stone-600 mt-2">Prioritering, owners, dependencies og beslutningspunkter — tværorganisatorisk.</p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <button class="btn btn-secondary" onclick="toast('Board pack: Portfolio slide (mock)');">Export PPT</button>
               <button class="btn btn-ghost" onclick="toast('Filter åbnet (mock)');">Filter</button>
             </div>
           </div>
 
           <div class="space-y-3">
-            <!-- item 1 -->
             <div class="border border-stone-200 rounded-xl p-5 hover:bg-stone-50 transition">
               <div class="flex items-center justify-between gap-4">
                 <div class="min-w-0">
@@ -893,7 +911,7 @@
                   <p class="text-xs text-stone-500 mt-1">Effort: Med</p>
                 </div>
               </div>
-              <div class="mt-4 grid grid-cols-4 gap-3 text-xs">
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 text-xs">
                 <div class="bg-stone-50 border border-stone-200 rounded-lg p-3">
                   <p class="font-semibold text-stone-700">Next decision</p>
                   <p class="text-stone-600 mt-1">Approve cadence + owners</p>
@@ -913,7 +931,6 @@
               </div>
             </div>
 
-            <!-- item 2 -->
             <div class="border border-stone-200 rounded-xl p-5 hover:bg-stone-50 transition">
               <div class="flex items-center justify-between gap-4">
                 <div class="min-w-0">
@@ -931,7 +948,7 @@
                   <p class="text-xs text-stone-500 mt-1">Effort: Low</p>
                 </div>
               </div>
-              <div class="mt-4 grid grid-cols-4 gap-3 text-xs">
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 text-xs">
                 <div class="bg-stone-50 border border-stone-200 rounded-lg p-3">
                   <p class="font-semibold text-stone-700">Blocker</p>
                   <p class="text-stone-600 mt-1">Owner alignment</p>
@@ -951,7 +968,6 @@
               </div>
             </div>
 
-            <!-- item 3 -->
             <div class="border border-stone-200 rounded-xl p-5 hover:bg-stone-50 transition">
               <div class="flex items-center justify-between gap-4">
                 <div class="min-w-0">
@@ -969,7 +985,7 @@
                   <p class="text-xs text-stone-500 mt-1">Effort: Med</p>
                 </div>
               </div>
-              <div class="mt-4 grid grid-cols-4 gap-3 text-xs">
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 text-xs">
                 <div class="bg-stone-50 border border-stone-200 rounded-lg p-3">
                   <p class="font-semibold text-stone-700">Benefit</p>
                   <p class="text-stone-600 mt-1">Meetings +22%</p>
@@ -991,9 +1007,8 @@
           </div>
         </div>
 
-        <!-- Governance + Change -->
-        <div class="col-span-5 space-y-6">
-          <div class="card rounded-2xl p-8">
+        <div class="col-span-12 xl:col-span-5 space-y-6">
+          <div class="card rounded-2xl p-6 sm:p-8">
             <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Governance</p>
             <h3 class="serif text-2xl text-stone-900 mt-2">Cadence & Decisioning</h3>
             <p class="text-sm text-stone-600 mt-2">Fast rytme og klart ejerskab skaber fremdrift i en partnerorganisation.</p>
@@ -1013,13 +1028,13 @@
               </div>
             </div>
 
-            <div class="mt-6 flex items-center gap-3">
+            <div class="mt-6 flex items-center gap-3 flex-wrap">
               <button class="btn btn-primary" onclick="toast('Board pack: Governance slide (mock)');">Export board pack</button>
               <button class="btn btn-secondary" onclick="toast('Change plan åbnet (mock)');">Change plan</button>
             </div>
           </div>
 
-          <div class="card rounded-2xl p-8">
+          <div class="card rounded-2xl p-6 sm:p-8">
             <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Change</p>
             <h3 class="serif text-2xl text-stone-900 mt-2">Enablement & Adoption</h3>
             <ul class="mt-4 text-sm text-stone-700 space-y-2 list-disc pl-5">
@@ -1033,14 +1048,14 @@
       </div>
 
       <!-- Focus Clients Table -->
-      <div class="card rounded-2xl p-8 mb-14 animate-in delay-300">
-        <div class="flex items-start justify-between mb-6">
+      <div class="card rounded-2xl p-6 sm:p-8 mb-10 sm:mb-14 animate-in delay-300">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
           <div>
             <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Focus clients</p>
             <h3 class="serif text-2xl text-stone-900 mt-2">Account Management Cockpit</h3>
             <p class="text-sm text-stone-600 mt-2">Stakeholder coverage, whitespace og partner-safe next actions — alt auto-logget i CRM.</p>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 flex-wrap">
             <button class="btn btn-secondary" onclick="toast('Board pack: Focus Clients slide (mock)');">Export PPT</button>
             <button class="btn btn-primary" onclick="toast('CRM sync: Focus Clients updates (mock)');">Sync to CRM</button>
           </div>
@@ -1100,7 +1115,7 @@
       </div>
 
       <div class="pb-10">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h3 class="serif text-2xl text-stone-900">Commercial Excellence = strategi der bliver til resultater</h3>
             <p class="text-stone-600 mt-2 max-w-3xl leading-relaxed">
@@ -1120,8 +1135,10 @@
   <!-- ====================== RAG Drawer ====================== -->
   <div id="ragDrawer" class="fixed inset-0 z-[60] hidden">
     <div class="absolute inset-0 bg-black/30" onclick="closeRagDrawer()"></div>
-    <div class="absolute right-0 top-0 h-full w-[540px] bg-white shadow-2xl border-l border-stone-200 p-8 overflow-y-auto">
-      <div class="flex items-start justify-between">
+
+    <!-- drawer responsive width -->
+    <div class="absolute right-0 top-0 h-full w-full sm:w-[540px] bg-white shadow-2xl border-l border-stone-200 p-6 sm:p-8 overflow-y-auto">
+      <div class="flex items-start justify-between gap-4">
         <div>
           <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">RAG Source Trail</p>
           <h3 class="serif text-2xl text-stone-900 mt-2">Hvorfor denne anbefaling?</h3>
@@ -1204,16 +1221,17 @@
   <div id="crmModal" class="fixed inset-0 z-[70] hidden">
     <div class="absolute inset-0 bg-black/30" onclick="closeCrmModal()"></div>
 
-    <div class="absolute left-1/2 top-1/2 w-[900px] -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-2xl border border-stone-200 overflow-hidden">
-      <div class="p-7 border-b border-stone-200 flex items-center justify-between">
+    <!-- modal responsive: full width on mobile + scroll -->
+    <div class="absolute left-1/2 top-1/2 w-[calc(100%-1.5rem)] sm:w-[900px] -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-2xl border border-stone-200 overflow-hidden max-h-[85vh]">
+      <div class="p-5 sm:p-7 border-b border-stone-200 flex items-center justify-between gap-4">
         <div>
           <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">CRM preview</p>
-          <h3 class="serif text-2xl text-stone-900 mt-1">Det her bliver oprettet — uden manuelt arbejde</h3>
+          <h3 class="serif text-xl sm:text-2xl text-stone-900 mt-1">Det her bliver oprettet — uden manuelt arbejde</h3>
         </div>
         <button class="btn btn-ghost" onclick="closeCrmModal()">Luk</button>
       </div>
 
-      <div class="p-7 grid grid-cols-2 gap-6">
+      <div class="p-5 sm:p-7 grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-y-auto" style="max-height: calc(85vh - 140px);">
         <div class="card rounded-xl p-6">
           <p class="text-sm font-semibold text-stone-900 mb-4">Objects</p>
           <ul class="text-sm text-stone-700 space-y-2">
@@ -1234,13 +1252,13 @@
           </ul>
         </div>
 
-        <div class="col-span-2 card rounded-xl p-6">
+        <div class="sm:col-span-2 card rounded-xl p-6">
           <div class="flex items-center justify-between">
             <p class="text-sm font-semibold text-stone-900">Field mapping (eksempel)</p>
             <span class="crm-badge">Internal CRM</span>
           </div>
 
-          <div class="mt-4 grid grid-cols-3 gap-4 text-sm">
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
             <div class="bg-stone-50 border border-stone-200 rounded-lg p-4">
               <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">RAG</p>
               <p class="mt-2 text-stone-800">Confidence: <span id="crmRagConfidence">94%</span></p>
@@ -1270,11 +1288,11 @@
         </div>
       </div>
 
-      <div class="p-7 border-t border-stone-200 flex items-center justify-between">
+      <div class="p-5 sm:p-7 border-t border-stone-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="text-sm text-stone-600">
           Tip: Brug “Monitoring (0 min)” i mødet for at vise “ingen pres, kun upside”.
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 flex-wrap">
           <button class="btn btn-secondary" onclick="enableMonitoringOnly()">Sæt til Monitoring (ingen handling)</button>
           <button class="btn btn-primary" onclick="syncToCrm()">
             Godkend & sync til CRM <span class="text-xs opacity-80">(1 klik)</span>
@@ -1286,7 +1304,6 @@
 
   <!-- ====================== JS ====================== -->
   <script>
-    // Demo partner state (kan erstattes af API-kald)
     const partners = {
       camilla: { upside: "+2.4M", timeSaved: "11.3h sparet", rag: { status: "GREEN", confidence: 94, freshness: "0–2 dage", coverage: "8/10 essentials" } },
       morten:  { upside: "+4.1M", timeSaved: "8.6h sparet",  rag: { status: "AMBER", confidence: 88, freshness: "2–7 dage", coverage: "7/10 essentials" } },
@@ -1295,7 +1312,6 @@
 
     let monitoringOn = true;
 
-    // ---------- Page switching ----------
     function showPage(page) {
       const opp = document.getElementById("pageOpportunity");
       const com = document.getElementById("pageCommercial");
@@ -1326,7 +1342,6 @@
       }
     }
 
-    // ---------- RAG UI ----------
     function setRagUI(rag) {
       const pill = document.getElementById("ragStatusPill");
       const conf = document.getElementById("ragConfidence");
@@ -1353,7 +1368,6 @@
       }
     }
 
-    // ---------- Partner switching ----------
     const partnerSelect = document.getElementById("partnerSelect");
     if (partnerSelect) {
       partnerSelect.addEventListener("change", (e) => {
@@ -1362,14 +1376,12 @@
         document.getElementById("partnerTimeSaved").textContent = "• " + p.timeSaved;
         setRagUI(p.rag);
 
-        // keep CRM preview aligned
         const crmConf = document.getElementById("crmRagConfidence");
         const crmStat = document.getElementById("crmRagStatus");
         if (crmConf) crmConf.textContent = p.rag.confidence + "%";
         if (crmStat) crmStat.textContent = p.rag.status;
       });
 
-      // init
       const initP = partners[partnerSelect.value];
       document.getElementById("partnerUpside").textContent = initP.upside;
       document.getElementById("partnerTimeSaved").textContent = "• " + initP.timeSaved;
@@ -1381,11 +1393,9 @@
       if (crmStat) crmStat.textContent = initP.rag.status;
     }
 
-    // ---------- RAG drawer ----------
     function openRagDrawer() { document.getElementById("ragDrawer").classList.remove("hidden"); }
     function closeRagDrawer() { document.getElementById("ragDrawer").classList.add("hidden"); }
 
-    // ---------- Monitoring ----------
     function toggleMonitoring() {
       monitoringOn = !monitoringOn;
       document.getElementById("monitoringState").textContent = monitoringOn ? "ON" : "OFF";
@@ -1399,7 +1409,6 @@
       toast("Monitoring valgt • 0 min • systemet fortsætter og logger i CRM");
     }
 
-    // ---------- CRM modal ----------
     function openCrmModal() {
       const currentStatus = (document.getElementById("ragStatusPill")?.textContent || "GREEN").replace("RAG:", "").trim();
       const currentConf = document.getElementById("ragConfidence")?.textContent || "94%";
@@ -1410,7 +1419,6 @@
     }
     function closeCrmModal() { document.getElementById("crmModal").classList.add("hidden"); }
 
-    // ---------- CRM Sync (demo) ----------
     async function syncToCrm() {
       const payload = {
         idempotency_key: cryptoRandomKey(),
@@ -1430,9 +1438,6 @@
         audit: { conflict_check: "auto-cleared", evidence_trail: true, no_manual_entry: true }
       };
 
-      // Replace with your backend endpoint:
-      // await fetch("/api/crm/sync", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-
       console.log("CRM SYNC PAYLOAD:", payload);
 
       closeCrmModal();
@@ -1445,13 +1450,13 @@
 
     function toast(message) {
       const el = document.createElement("div");
-      el.className = "fixed bottom-6 right-6 z-[80] bg-white border border-stone-200 shadow-xl rounded-xl px-5 py-3 text-sm text-stone-800";
+      // Mobile: centered + full width; Desktop: bottom-right
+      el.className = "fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-6 z-[80] bg-white border border-stone-200 shadow-xl rounded-xl px-5 py-3 text-sm text-stone-800 w-[calc(100%-2rem)] sm:w-auto";
       el.innerHTML = `<div class="flex items-center gap-2"><span class="crm-badge">CRM</span><span>${message}</span></div>`;
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 3200);
     }
 
-    // Default tab highlight on load
     document.addEventListener("DOMContentLoaded", () => {
       const navOpp = document.getElementById("navOpportunity");
       navOpp?.classList.add("bg-white", "shadow-sm", "border", "border-stone-200");
